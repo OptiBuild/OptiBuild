@@ -1,6 +1,4 @@
 package com.optibuild.website.model.components;
-
-import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,12 +6,14 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PowerSupply extends Component {
+public class MotherboardFormFactorCompatibility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type;
-    private int maxPower;
-    private int maxPSULength;
-    private PowerSupplyModular modular;
+    private String formFactor;
+
+    @ManyToOne
+    @JoinColumn(name = "motherboard")
+    private Case aCase;
+
 }

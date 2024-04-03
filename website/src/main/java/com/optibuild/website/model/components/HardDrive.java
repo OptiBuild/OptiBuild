@@ -1,24 +1,22 @@
 package com.optibuild.website.model.components;
 
 import com.optibuild.website.model.Component;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.ArrayList;
-
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 public class HardDrive extends Component {
-    @Getter
-    @Setter
-    protected ArrayList<String> capacity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
+    protected String type;
+    protected String capacity;
     protected float formFactor;
     protected String hdInterface;
     protected boolean NVMe;
-
-    public HardDrive(long id, String brand, String model, int price, int score, ArrayList<String> capacity, float formFactor, String hdInterface, boolean NVMe) {
-        super(id, brand, model, price, score);
-        this.capacity = capacity;
-        this.formFactor = formFactor;
-        this.hdInterface = hdInterface;
-        this.NVMe = NVMe;
-    }
 }

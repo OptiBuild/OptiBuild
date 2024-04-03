@@ -1,6 +1,6 @@
 package com.optibuild.website.model.components;
 
-import com.optibuild.website.model.Component;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,12 +8,13 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PowerSupply extends Component {
+public class SocketCompatibility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type;
-    private int maxPower;
-    private int maxPSULength;
-    private PowerSupplyModular modular;
+    private String socketType;
+
+    @ManyToOne
+    @JoinColumn(name = "model")
+    private CPUCooler cpuCooler;
 }

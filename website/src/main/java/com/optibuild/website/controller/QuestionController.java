@@ -1,6 +1,7 @@
 package com.optibuild.website.controller;
 
 import com.optibuild.website.Service.ComponentService;
+import com.optibuild.website.Service.ProcessAnswerService;
 import com.optibuild.website.model.Answer;
 import com.optibuild.website.model.Component;
 import org.springframework.http.ResponseEntity;
@@ -8,26 +9,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.ResponseErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/api")
 public class QuestionController {
     private final ComponentService componentService;
+    private final ProcessAnswerService processAnswerService;
 
     // 注入ComponentService
-    public QuestionController(ComponentService componentService) {
+    public QuestionController(ComponentService componentService, ProcessAnswerService processAnswerService) {
         this.componentService = componentService;
+        this.processAnswerService = processAnswerService;
     }
 
     // users submit answers
     @PostMapping("/questions")
-    public ResponseEntity<List<Component>> submitAnswers(@RequestBody List<ArrayList<Answer>> answers) {
+    public ResponseEntity<Map<String, String>> submitAnswers(@RequestBody Object answer) {
+        // deal with different answer types
+        List<Answer> answers = processAnswerService.processAnswers(answer);
+        // parse different answers to the corresponding component specifications
+        List<List<String>> parseResult = processAnswerService.parseAnswer(answers);
         // 调用服务类处理答案，并获取匹配的components
-        ArrayList<ArrayList<String>> parseResult = componentService.parseAnswer(answers);
-        List<Component> components = componentService.getMatchingComponents(parseResult);
+        Map<String, String> components = componentService.getMatchingComponents(parseResult);
         // 返回匹配的components
         return ResponseEntity.ok(components);
     }
