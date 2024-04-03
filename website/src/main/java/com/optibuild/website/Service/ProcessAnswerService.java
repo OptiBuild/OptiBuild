@@ -113,7 +113,7 @@ public class ProcessAnswerService {
         parseAnswer.add(ram);
 
         //process game list
-
+        processGameList(gamelist, parseAnswer);
 
         return parseAnswer;
     }

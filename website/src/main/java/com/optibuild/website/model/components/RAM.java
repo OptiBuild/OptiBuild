@@ -16,6 +16,6 @@ public class RAM extends Component {
     private int stickNum;
     private int size;
     private int clockSpeed;
-    private float voltage;
+    private double voltage;
     private boolean RGB;
 }

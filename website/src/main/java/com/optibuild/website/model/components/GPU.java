@@ -12,6 +12,7 @@ public class GPU extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int score;
     private int codaCoreNum;
     private int baseClock;
     private int boostClock;

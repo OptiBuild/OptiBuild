@@ -15,5 +15,5 @@ public class Component {
     protected String brand;
     protected String model;
     protected double price;
-    protected int score;
+
 }
