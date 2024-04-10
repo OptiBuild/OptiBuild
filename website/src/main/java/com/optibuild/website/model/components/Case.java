@@ -2,6 +2,8 @@ package com.optibuild.website.model.components;
 
 import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,8 +11,8 @@ public class Case extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-    private Set<MotherboardFormFactorCompatibility> motherboardFormFactorCompatibilitySet;
+    @ManyToMany(mappedBy = "compatibleCases")
+    private Set<Motherboard> compatibleMotherboards = new HashSet<>();
     private int driveBays35;
     private int driveBays25;
     private int maxGPULength;
@@ -47,12 +49,12 @@ public class Case extends Component {
         this.id = id;
     }
 
-    public Set<MotherboardFormFactorCompatibility> getMotherboardFormFactorCompatibilitySet() {
-        return motherboardFormFactorCompatibilitySet;
+    public Set<Motherboard> getCompatibleMotherboards() {
+        return compatibleMotherboards;
     }
 
-    public void setMotherboardFormFactorCompatibilitySet(Set<MotherboardFormFactorCompatibility> motherboardFormFactorCompatibilitySet) {
-        this.motherboardFormFactorCompatibilitySet = motherboardFormFactorCompatibilitySet;
+    public void setCompatibleMotherboards(Set<Motherboard> compatibleMotherboards) {
+        this.compatibleMotherboards = compatibleMotherboards;
     }
 
     public int getDriveBays35() {

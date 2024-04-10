@@ -3,6 +3,9 @@ package com.optibuild.website.model.components;
 import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Motherboard extends Component {
     @Id
@@ -22,7 +25,21 @@ public class Motherboard extends Component {
     private boolean supportNVMe;
     private String formFactor;
 
+    @ManyToMany
+    @JoinTable(name = "motherboard_case_compatibility",
+            joinColumns = @JoinColumn(name = "motherboard_id"),
+            inverseJoinColumns = @JoinColumn(name = "case_id"))
+    private Set<Case> compatibleCases = new HashSet<>();
+
     public Motherboard() {
+    }
+
+    public Set<Case> getCompatibleCases() {
+        return compatibleCases;
+    }
+
+    public void setCompatibleCases(Set<Case> compatibleCases) {
+        this.compatibleCases = compatibleCases;
     }
 
     public Long getId() {

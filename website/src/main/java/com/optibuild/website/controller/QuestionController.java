@@ -16,12 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("localhost:8888")
+@RequestMapping("http://optibuild/api")
 public class QuestionController {
     private final ComponentService componentService;
     private final ProcessAnswerService processAnswerService;
 
-    // 注入ComponentService
     public QuestionController(ComponentService componentService, ProcessAnswerService processAnswerService) {
         this.componentService = componentService;
         this.processAnswerService = processAnswerService;
@@ -36,7 +35,6 @@ public class QuestionController {
         List<List<String>> parseResult = processAnswerService.parseAnswer(answers);
         // process the answer and obtain the component list
         Map<String, String> components = componentService.getMatchingComponents(parseResult);
-
         return ResponseEntity.ok(components);
     }
 }
