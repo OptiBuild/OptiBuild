@@ -37,7 +37,7 @@ public class HardDriveService {
         double ssdPrice = 0;
         if (size >= 4*1024) {
             hdd = findLowestPrice("HDD", "2TB", hddPrice);
-            ssd = findLowestPrice("SSD", "2TB", ssdPrice;
+            ssd = findLowestPrice("SSD", "2TB", ssdPrice);
         } else if (size >= 2*1024) {
             hdd = findLowestPrice("HDD", "2TB", hddPrice);
             ssd = findLowestPrice("SSD", "1TB", ssdPrice);
