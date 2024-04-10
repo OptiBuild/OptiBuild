@@ -1,29 +1,37 @@
 package com.optibuild.website.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
+@MappedSuperclass
 public class Component {
-    @Getter
-    @Setter
-    @Id
-    protected Long id;
     protected String brand;
     protected String model;
-    protected float price;
-    protected long score;
+    protected double price;
 
     public Component() {
-
     }
-    public Component(Long id, String brand, String model, float price, long score) {
-        this.id = id;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
         this.model = model;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
-        this.score = score;
     }
 }

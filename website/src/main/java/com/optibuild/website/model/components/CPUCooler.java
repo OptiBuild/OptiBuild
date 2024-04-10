@@ -1,34 +1,70 @@
 package com.optibuild.website.model.components;
 
 import com.optibuild.website.model.Component;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import java.util.Set;
 
-import java.util.ArrayList;
-
+@Entity
 public class CPUCooler extends Component {
-    @Getter
-    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int size;
-    private ArrayList<String> CPUSocket;
+//    private String CPUSocket;
+    @OneToMany(mappedBy = "model")
+    private Set<SocketCompatibility> socketCompatibilitySet;
     private int height;
     private boolean RGB;
     private boolean addressable;
 
-    public CPUCooler(long id, String brand, String model, int price, int score, int size, ArrayList<String> CPUSocket, int height, boolean RGB, boolean addressable) {
-        super(id, brand, model, price, score);
+    public CPUCooler() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
         this.size = size;
-        this.CPUSocket = CPUSocket;
+    }
+
+    public Set<SocketCompatibility> getSocketCompatibilitySet() {
+        return socketCompatibilitySet;
+    }
+
+    public void setSocketCompatibilitySet(Set<SocketCompatibility> socketCompatibilitySet) {
+        this.socketCompatibilitySet = socketCompatibilitySet;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isRGB() {
+        return RGB;
+    }
+
+    public void setRGB(boolean RGB) {
         this.RGB = RGB;
+    }
+
+    public boolean isAddressable() {
+        return addressable;
+    }
+
+    public void setAddressable(boolean addressable) {
         this.addressable = addressable;
     }
-
-    public boolean checkCPUCoolerCompatibility (CPU model) {
-        boolean compatible = false;
-        // TODO
-
-        return compatible;
-    }
-
 }

@@ -1,21 +1,38 @@
 package com.optibuild.website.model.components;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-
+@Entity
+@DiscriminatorValue("SSD")
 public class SSD extends HardDrive{
-    @Getter
-    @Setter
     private int maxSequentialRead;
     private int maxSequentialWrite;
     private String memoryComponent;
 
-    public SSD(long id, String brand, String model, int price, int score, ArrayList<String> capacity, float formFactor, String hdInterface, boolean NVMe, int maxSequentialRead, int maxSequentialWrite, String memoryComponent) {
-        super(id, brand, model, price, score, capacity, formFactor, hdInterface, NVMe);
+    public SSD() {
+    }
+
+    public int getMaxSequentialRead() {
+        return maxSequentialRead;
+    }
+
+    public void setMaxSequentialRead(int maxSequentialRead) {
         this.maxSequentialRead = maxSequentialRead;
+    }
+
+    public int getMaxSequentialWrite() {
+        return maxSequentialWrite;
+    }
+
+    public void setMaxSequentialWrite(int maxSequentialWrite) {
         this.maxSequentialWrite = maxSequentialWrite;
+    }
+
+    public String getMemoryComponent() {
+        return memoryComponent;
+    }
+
+    public void setMemoryComponent(String memoryComponent) {
         this.memoryComponent = memoryComponent;
     }
 }

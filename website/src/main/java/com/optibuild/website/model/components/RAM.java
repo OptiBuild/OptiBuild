@@ -1,26 +1,76 @@
 package com.optibuild.website.model.components;
 
 import com.optibuild.website.model.Component;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
 
+@Entity
 public class RAM extends Component {
-    @Getter
-    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int DDRVersion;
     private int stickNum;
-    private int memorySize;
+    private int size;
     private int clockSpeed;
-    private float voltage;
+    private double voltage;
     private boolean RGB;
 
-    public RAM(long id, String brand, String model, int price, int score, int DDRVersion, int stickNum, int memorySize, int clockSpeed, float voltage, boolean RGB) {
-        super(id, brand, model, price, score);
+    public RAM() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getDDRVersion() {
+        return DDRVersion;
+    }
+
+    public void setDDRVersion(int DDRVersion) {
         this.DDRVersion = DDRVersion;
+    }
+
+    public int getStickNum() {
+        return stickNum;
+    }
+
+    public void setStickNum(int stickNum) {
         this.stickNum = stickNum;
-        this.memorySize = memorySize;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getClockSpeed() {
+        return clockSpeed;
+    }
+
+    public void setClockSpeed(int clockSpeed) {
         this.clockSpeed = clockSpeed;
+    }
+
+    public double getVoltage() {
+        return voltage;
+    }
+
+    public void setVoltage(double voltage) {
         this.voltage = voltage;
+    }
+
+    public boolean isRGB() {
+        return RGB;
+    }
+
+    public void setRGB(boolean RGB) {
         this.RGB = RGB;
     }
 }
