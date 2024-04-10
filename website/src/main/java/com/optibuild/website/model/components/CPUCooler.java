@@ -2,15 +2,9 @@ package com.optibuild.website.model.components;
 
 import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.net.Socket;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class CPUCooler extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,20 +17,54 @@ public class CPUCooler extends Component {
     private boolean RGB;
     private boolean addressable;
 
-//    public CPUCooler(long id, String brand, String model, int price, int score, int size, ArrayList<String> CPUSocket, int height, boolean RGB, boolean addressable) {
-//        super(id, brand, model, price, score);
-//        this.size = size;
-//        this.CPUSocket = CPUSocket;
-//        this.height = height;
-//        this.RGB = RGB;
-//        this.addressable = addressable;
-//    }
-//
-    public boolean checkCPUCoolerCompatibility (CPU model) {
-        boolean compatible = false;
-        // TODO
-
-        return compatible;
+    public CPUCooler() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public Set<SocketCompatibility> getSocketCompatibilitySet() {
+        return socketCompatibilitySet;
+    }
+
+    public void setSocketCompatibilitySet(Set<SocketCompatibility> socketCompatibilitySet) {
+        this.socketCompatibilitySet = socketCompatibilitySet;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public boolean isRGB() {
+        return RGB;
+    }
+
+    public void setRGB(boolean RGB) {
+        this.RGB = RGB;
+    }
+
+    public boolean isAddressable() {
+        return addressable;
+    }
+
+    public void setAddressable(boolean addressable) {
+        this.addressable = addressable;
+    }
 }

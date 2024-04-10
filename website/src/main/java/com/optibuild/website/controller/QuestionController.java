@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("localhost:8888")
 public class QuestionController {
     private final ComponentService componentService;
     private final ProcessAnswerService processAnswerService;

@@ -2,14 +2,9 @@ package com.optibuild.website.model.components;
 
 import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class Case extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,4 +35,79 @@ public class Case extends Component {
 //        this.weight = 17.31;
 //    }
 
+
+    public Case() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<MotherboardFormFactorCompatibility> getMotherboardFormFactorCompatibilitySet() {
+        return motherboardFormFactorCompatibilitySet;
+    }
+
+    public void setMotherboardFormFactorCompatibilitySet(Set<MotherboardFormFactorCompatibility> motherboardFormFactorCompatibilitySet) {
+        this.motherboardFormFactorCompatibilitySet = motherboardFormFactorCompatibilitySet;
+    }
+
+    public int getDriveBays35() {
+        return driveBays35;
+    }
+
+    public void setDriveBays35(int driveBays35) {
+        this.driveBays35 = driveBays35;
+    }
+
+    public int getDriveBays25() {
+        return driveBays25;
+    }
+
+    public void setDriveBays25(int driveBays25) {
+        this.driveBays25 = driveBays25;
+    }
+
+    public int getMaxGPULength() {
+        return maxGPULength;
+    }
+
+    public void setMaxGPULength(int maxGPULength) {
+        this.maxGPULength = maxGPULength;
+    }
+
+    public int getMaxCPUCoolerHeight() {
+        return maxCPUCoolerHeight;
+    }
+
+    public void setMaxCPUCoolerHeight(int maxCPUCoolerHeight) {
+        this.maxCPUCoolerHeight = maxCPUCoolerHeight;
+    }
+
+    public int getMaxPSULength() {
+        return maxPSULength;
+    }
+
+    public void setMaxPSULength(int maxPSULength) {
+        this.maxPSULength = maxPSULength;
+    }
+
+    public String getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 }

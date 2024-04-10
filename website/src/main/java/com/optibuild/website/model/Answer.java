@@ -1,16 +1,11 @@
 package com.optibuild.website.model;
 
-import lombok.Getter;
-import lombok.Setter;
 
 
 import java.util.List;
 
 
 public class Answer {
-
-    @Getter
-    @Setter
     private int questionId; // 问题的唯一标识符
     private List<String> choices; // 用户的答案选择
 
@@ -20,6 +15,14 @@ public class Answer {
     }
 
     public Answer() {
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
     public List<String> getChoices() {
