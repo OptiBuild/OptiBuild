@@ -34,9 +34,9 @@ public class QuestionController {
         List<Answer> answers = processAnswerService.processAnswers(answer);
         // parse different answers to the corresponding component specifications
         List<List<String>> parseResult = processAnswerService.parseAnswer(answers);
-        // 调用服务类处理答案，并获取匹配的components
+        // process the answer and obtain the component list
         Map<String, String> components = componentService.getMatchingComponents(parseResult);
-        // 返回匹配的components
+
         return ResponseEntity.ok(components);
     }
 }

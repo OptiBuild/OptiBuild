@@ -40,7 +40,10 @@ public class ComponentService {
         CPU cpu = cpuService.cpuModel(specifications.get(index++));
         GPU gpu = gpuService.gpuModel(specifications.get(index++));
         RAM ram = ramService.ramModel(specifications.get(index++));
-        String hardDrive = hardDriveService.hardDrive(specifications.get(index++));
+
+        double hardDrivePrice = 0;
+
+        String hardDrive = hardDriveService.hardDrive(specifications.get(index++), hardDrivePrice);
         String[] parts = hardDrive.split(",");
         String hdd = parts[0];
         String ssd = parts[1];
@@ -48,6 +51,8 @@ public class ComponentService {
         PowerSupply powerSupply = powerSupplyService.powerSupplyModel(cpu, gpu);
         Motherboard motherboard = motherboardService.motherboard(cpu,gpu,ram,hardDriveRepository.findBymodel(hdd));
         Case computerCase = caseService.getCase(gpu, motherboard, powerSupply, cpuCooler);
+
+        double totalPrice = cpu.getPrice() + gpu.getPrice() + ram.getPrice() + hardDrivePrice + cpuCooler.getPrice() + powerSupply.getPrice() + motherboard.getPrice() + computerCase.getPrice();
 
         // 将各个组件添加到 Map
         components.put("CPU", formatComponent(cpu.getBrand(), cpu.getModel()));
@@ -58,6 +63,7 @@ public class ComponentService {
         components.put("PowerSupply", formatComponent(powerSupply.getBrand(), powerSupply.getModel()));
         components.put("Motherboard", formatComponent(motherboard.getBrand(), motherboard.getModel()));
         components.put("Case", formatComponent(computerCase.getBrand(), computerCase.getModel()));
+        components.put("Cost", String.valueOf(totalPrice));
         return components;
     }
 
