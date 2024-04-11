@@ -97,7 +97,7 @@ CREATE TABLE `CPU` (
   `TDP` int DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `CPUCooler` (
   `model` varchar(255) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +245,7 @@ CREATE TABLE `GPU` (
   `length` int DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,8 +275,13 @@ CREATE TABLE `HardDrives` (
   `brand` varchar(255) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
+  `maxTransferRate` int DEFAULT NULL,
+  `cache` int DEFAULT NULL,
+  `maxSequentialRead` int DEFAULT NULL,
+  `maxSequentialWrite` int DEFAULT NULL,
+  `memoryComponent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,36 +290,8 @@ CREATE TABLE `HardDrives` (
 
 LOCK TABLES `HardDrives` WRITE;
 /*!40000 ALTER TABLE `HardDrives` DISABLE KEYS */;
-INSERT INTO `HardDrives` VALUES (94,'HDD','4TB,8TB',3.5,'SATA III',4,'Seagate','FireCuda HDD',101.00),(95,'HDD','500GB, 1TB, 2TB, 4TB, 6TB, 8TB, 10TB',3.5,'SATA III',4,'WD','Black HDD',76.99),(96,'HDD','500GB, 1TB, 3TB',3.5,'SATA III',4,'WD','Blue HDD',30.85),(97,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'Seagate','IronWolf Pro HDD',110.19),(98,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'WD','Red Pro HDD',400.99),(99,'HDD','4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB',3.5,'SATA III',4,'Toshiba','N300 Pro ',186.64),(100,'SSD','4TB, 2TB, 1TB',2280,'M.2',0,'WD','BLACK SN850X NVMe',94.99),(101,'SSD','2TB, 1TB',2280,'M.2',0,'Samsung','990 EVO',94.99),(102,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','T-FT-FORCE VULCAN Z',54.99),(103,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','CX2',57.99),(104,'SSD','1TB, 500GB, 250GB',2280,'M.2',0,'Samsung','980',99.99);
+INSERT INTO `HardDrives` VALUES (1,'HDD','4TB,8TB',3.5,'SATA III',4,'Seagate','FireCuda HDD',101.00,260,256,0,0,'\r'),(2,'HDD','500GB, 1TB, 2TB, 4TB, 6TB, 8TB, 10TB',3.5,'SATA III',4,'WD','Black HDD',76.99,263,256,0,0,'\r'),(3,'HDD','500GB, 1TB, 3TB',3.5,'SATA III',4,'WD','Blue HDD',30.85,185,128,0,0,'\r'),(4,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'Seagate','IronWolf Pro HDD',110.19,0,256,0,0,'\r'),(5,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'WD','Red Pro HDD',400.99,0,512,0,0,'\r'),(6,'HDD','4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB',3.5,'SATA III',4,'Toshiba','N300 Pro ',186.64,0,512,0,0,'\r'),(7,'SSD','4TB, 2TB, 1TB',2280,'M.2',0,'WD','BLACK SN850X NVMe',94.99,0,0,7300,6300,'3D NAND TLC\r'),(8,'SSD','2TB, 1TB',2280,'M.2',0,'Samsung','990 EVO',94.99,0,0,5000,4200,'V-NAND TLC\r'),(9,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','T-FT-FORCE VULCAN Z',54.99,0,0,550,500,'3D NAND\r'),(10,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','CX2',57.99,0,0,540,490,'3D TLC\r'),(11,'SSD','1TB, 500GB, 250GB',2280,'M.2',0,'Samsung','980',99.99,0,0,3500,3000,'V-NAND MLC');
 /*!40000 ALTER TABLE `HardDrives` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `HDD`
---
-
-DROP TABLE IF EXISTS `HDD`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `HDD` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `hardDriveId` bigint DEFAULT NULL,
-  `maxTransferRate` int DEFAULT NULL,
-  `cache` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_hardDriveId` (`hardDriveId`),
-  CONSTRAINT `hdd_ibfk_1` FOREIGN KEY (`hardDriveId`) REFERENCES `HardDrives` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `HDD`
---
-
-LOCK TABLES `HDD` WRITE;
-/*!40000 ALTER TABLE `HDD` DISABLE KEYS */;
-INSERT INTO `HDD` VALUES (1,94,260,256),(2,95,263,256),(3,96,185,128),(4,97,0,256),(5,98,0,512),(6,99,0,512);
-/*!40000 ALTER TABLE `HDD` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -344,7 +321,7 @@ CREATE TABLE `Motherboard` (
   `price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `CHK_supportNVMe` CHECK ((`supportNVMe` in (0,1)))
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -401,7 +378,7 @@ CREATE TABLE `PowerSupply` (
   `maxPSULength` int DEFAULT NULL,
   `modular` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -433,7 +410,7 @@ CREATE TABLE `RAM` (
   `voltage` decimal(5,2) DEFAULT NULL,
   `RGB` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -469,35 +446,6 @@ LOCK TABLES `SocketCompatibility` WRITE;
 INSERT INTO `SocketCompatibility` VALUES (1,'Intel LGA 2066'),(2,'Intel LGA 2011-3'),(3,'Intel LGA 2011'),(4,'Intel LGA 1700'),(5,'Intel LGA 1200'),(6,'Intel LGA 1155'),(7,'Intel LGA 1151'),(8,'Intel LGA 1150'),(9,'AMD AM4'),(10,'AMD AM5'),(11,'Intel LGA 1156'),(12,'Intel LGA 115X'),(13,'Intel LGA 115x'),(14,'AMD AM3+'),(15,'AMD AM3'),(16,'AMD AM2+'),(17,'AMD AM2'),(18,'AMD FM2'),(19,'AMD FM1');
 /*!40000 ALTER TABLE `SocketCompatibility` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `SSD`
---
-
-DROP TABLE IF EXISTS `SSD`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `SSD` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `hardDriveId` bigint DEFAULT NULL,
-  `maxSequentialRead` int DEFAULT NULL,
-  `maxSequentialWrite` int DEFAULT NULL,
-  `memoryComponent` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `hardDriveId` (`hardDriveId`),
-  CONSTRAINT `ssd_ibfk_1` FOREIGN KEY (`hardDriveId`) REFERENCES `HardDrives` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `SSD`
---
-
-LOCK TABLES `SSD` WRITE;
-/*!40000 ALTER TABLE `SSD` DISABLE KEYS */;
-INSERT INTO `SSD` VALUES (1,100,7300,6300,'3D NAND TLC'),(2,101,5000,4200,'V-NAND TLC'),(3,102,550,500,'3D NAND'),(4,103,540,490,'3D TLC'),(5,104,3500,3000,'V-NAND MLC');
-/*!40000 ALTER TABLE `SSD` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -508,4 +456,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-10 20:09:43
+-- Dump completed on 2024-04-11 14:27:37
