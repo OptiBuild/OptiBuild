@@ -11,7 +11,7 @@ public class Motherboard extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String socket;
+    private String socketType;
     private String chipset;
     private int memorySlot;
     private int clockSpeed;
@@ -25,21 +25,8 @@ public class Motherboard extends Component {
     private boolean supportNVMe;
     private String formFactor;
 
-    @ManyToMany
-    @JoinTable(name = "motherboard_case_compatibility",
-            joinColumns = @JoinColumn(name = "motherboard_id"),
-            inverseJoinColumns = @JoinColumn(name = "case_id"))
-    private Set<Case> compatibleCases = new HashSet<>();
 
     public Motherboard() {
-    }
-
-    public Set<Case> getCompatibleCases() {
-        return compatibleCases;
-    }
-
-    public void setCompatibleCases(Set<Case> compatibleCases) {
-        this.compatibleCases = compatibleCases;
     }
 
     public Long getId() {
@@ -50,12 +37,12 @@ public class Motherboard extends Component {
         this.id = id;
     }
 
-    public String getSocket() {
-        return socket;
+    public String getSocketType() {
+        return socketType;
     }
 
-    public void setSocket(String socket) {
-        this.socket = socket;
+    public void setSocketType(String socketType) {
+        this.socketType = socketType;
     }
 
     public String getChipset() {

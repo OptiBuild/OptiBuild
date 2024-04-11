@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CPUCoolerRepository extends JpaRepository<CPUCooler, Long> {
-    List<CPUCooler> findBySocketType(@Param("socketType") String socket);
+
 }

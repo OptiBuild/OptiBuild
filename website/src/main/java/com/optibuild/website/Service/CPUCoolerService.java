@@ -2,31 +2,33 @@ package com.optibuild.website.Service;
 
 import com.optibuild.website.model.components.CPU;
 import com.optibuild.website.model.components.CPUCooler;
-import com.optibuild.website.repository.CPUCoolerRepository;
+import com.optibuild.website.model.components.SocketCompatibility;
+import com.optibuild.website.repository.SocketCompatibiltyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class CPUCoolerService {
-    private final CPUCoolerRepository cpuCoolerRepository;
+    private final SocketCompatibiltyRepository socketCompatibiltyRepository;
     @Autowired
-    public CPUCoolerService (CPUCoolerRepository cpuCoolerRepository) {
-        this.cpuCoolerRepository = cpuCoolerRepository;
+    public CPUCoolerService (SocketCompatibiltyRepository socketCompatibiltyRepository) {
+        this.socketCompatibiltyRepository = socketCompatibiltyRepository;
     }
 
     public CPUCooler cpuCooler(CPU cpu) {
         String socket = cpu.getSocketType();
-        List<CPUCooler> cpuCoolerList = cpuCoolerRepository.findBySocketType(socket);
-        CPUCooler cpuCooler = cpuCoolerList.get(0);
-        double price = cpuCooler.getPrice();
-        for (int i = 1; i<cpuCoolerList.size(); i++) {
-            if(cpuCoolerList.get(i).getPrice() < price) {
-                cpuCooler = cpuCoolerList.get(i);
-                price = cpuCooler.getPrice();
+        SocketCompatibility socketCompatibility = socketCompatibiltyRepository.findBySocketType(socket);
+        Set<CPUCooler> cpuCoolers = socketCompatibility.getCpuCoolers();
+        CPUCooler mostAffordableCooler = null;
+
+        for (CPUCooler cooler : cpuCoolers) {
+            if (mostAffordableCooler == null || cooler.getPrice() < mostAffordableCooler.getPrice()) {
+                mostAffordableCooler = cooler;
             }
         }
-        return cpuCooler;
+
+        return mostAffordableCooler;
     }
 }
