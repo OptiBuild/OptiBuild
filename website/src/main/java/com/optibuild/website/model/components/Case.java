@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "`case`")
 public class Case extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
