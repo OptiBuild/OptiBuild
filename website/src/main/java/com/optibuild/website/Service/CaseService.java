@@ -5,7 +5,9 @@ import com.optibuild.website.repository.CaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CaseService {
@@ -25,6 +27,18 @@ public class CaseService {
             caseList = caseRepository.findByMaxGPULengthGreaterThanAndMaxCPUCoolerHeightGreaterThanAndMaxPSULengthGreaterThan(gpuLength-1, cpuCoolerHeight-1, psuLength-1);
         } else {
             caseList = caseRepository.findByMaxGPULengthGreaterThanAndMaxCPUCoolerHeightGreaterThanAndMaxPSULengthGreaterThanAndMotherboardFormFactorCompatibility(gpuLength-1, cpuCoolerHeight-1, psuLength-1, formFactor);
+        }
+
+        // Further filter the cases based on motherboard compatibility
+        if (motherboard != null) {
+            List<Case> compatibleCases = new ArrayList<>();
+            for (Case aCase : caseList) {
+                Set<Motherboard> compatibleMotherboards = aCase.getCompatibleMotherboards();
+                if (compatibleMotherboards.contains(motherboard)) {
+                    compatibleCases.add(aCase);
+                }
+            }
+            caseList = compatibleCases;
         }
         return caseList.get(0);
     }

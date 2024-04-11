@@ -22,7 +22,8 @@ public class GPUService {
         if (gpuList.size() == 1) {
             if (Objects.equals(gpuList.get(0), "Default")) {
                 GPU gpu = new GPU();
-                gpu.setModel("Default");
+                gpu.setModel("N/A");
+                gpu.setBrand("");
                 gpuModel = gpu;
             }
         } else {

@@ -1,6 +1,6 @@
 package com.optibuild.website.model.components;
 
-
+import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,9 +10,8 @@ public class SocketCompatibility {
     private Long id;
     private String socketType;
 
-    @ManyToOne
-    @JoinColumn(name = "model")
-    private CPUCooler cpuCooler;
+    @ManyToMany(mappedBy = "socketCompatibilitySet")
+    private Set<CPUCooler> cpuCoolers;
 
     public SocketCompatibility() {
     }
@@ -33,11 +32,11 @@ public class SocketCompatibility {
         this.socketType = socketType;
     }
 
-    public CPUCooler getCpuCooler() {
-        return cpuCooler;
+    public Set<CPUCooler> getCpuCoolers() {
+        return cpuCoolers;
     }
 
-    public void setCpuCooler(CPUCooler cpuCooler) {
-        this.cpuCooler = cpuCooler;
+    public void setCpuCoolers(Set<CPUCooler> cpuCoolers) {
+        this.cpuCoolers = cpuCoolers;
     }
 }
