@@ -26,11 +26,7 @@ public class CaseService {
         int psuLength = powerSupply!=null ? powerSupply.getMaxPSULength() : 0;
         int cpuCoolerHeight = cpuCooler!=null ? cpuCooler.getHeight() : 0;
         List<Case> caseList;
-        if (formFactor == null) {
-            caseList = caseRepository.findByMaxGPULengthGreaterThanAndMaxCPUCoolerHeightGreaterThanAndMaxPSULengthGreaterThan(gpuLength-1, cpuCoolerHeight-1, psuLength-1);
-        } else {
-            caseList = caseRepository.findByMaxGPULengthGreaterThanAndMaxCPUCoolerHeightGreaterThanAndMaxPSULengthGreaterThanAndMotherboardFormFactorCompatibility(gpuLength-1, cpuCoolerHeight-1, psuLength-1, formFactor);
-        }
+        caseList = caseRepository.findByMaxGPULengthGreaterThanAndMaxCPUCoolerHeightGreaterThanAndMaxPSULengthGreaterThan(gpuLength-1, cpuCoolerHeight-1, psuLength-1);
 
         // Further filter the cases based on motherboard compatibility
         if (motherboard != null) {
