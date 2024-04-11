@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: Hardware_Components
 -- ------------------------------------------------------
--- Server version	8.3.0
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -92,12 +92,13 @@ CREATE TABLE `CPU` (
   `threadNum` int DEFAULT NULL,
   `upperClock` float DEFAULT NULL,
   `lowerClock` float DEFAULT NULL,
-  `socketType` varchar(100) DEFAULT NULL,
   `L3Cache` int DEFAULT NULL,
   `TDP` int DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
+  `socketId` bigint DEFAULT NULL,
+  `socketType` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +107,7 @@ CREATE TABLE `CPU` (
 
 LOCK TABLES `CPU` WRITE;
 /*!40000 ALTER TABLE `CPU` DISABLE KEYS */;
-INSERT INTO `CPU` VALUES (1,'Intel','Core i5-13400F',25257,10,16,2.5,4.6,'Socket 1700',20,65,185.99),(2,'AMD','Ryzen 5 7600',27263,6,12,3.8,5.1,'Socket AM5',32,65,198.99),(3,'Intel','Core i5-12600K',27749,10,16,3.7,4.9,'Socket 1700',20,125,169.99),(4,'AMD','Ryzen 5 7600X',28605,6,12,4.7,5.3,'Socket AM5',32,105,209.95),(5,'AMD','Ryzen 7 7800X3D',34399,8,16,4.2,5,'Socket AM5',96,120,357.00),(6,'AMD','Ryzen 7 7700',34620,8,16,3.8,5.3,'Socket AM5',32,65,268.04),(7,'Intel','Core i7-12700K',34664,12,20,3.6,5,'Socket 1700',25,125,224.99),(8,'AMD','Ryzen 7 7700X',36043,8,16,4.5,5.4,'Socket AM5',32,105,309.99),(9,'Intel','Core i5-13600K',38181,14,20,3.5,5.1,'Socket 1700',24,125,284.99),(10,'AMD','Ryzen 9 5900X',39197,12,24,3.7,4.8,'Socket AM4',64,105,279.00),(11,'Intel','Core i5-14600K',39322,14,20,3.5,5.3,'Socket 1700',24,125,309.99),(12,'Intel','Core i9-12900K',41377,16,24,3.2,5.2,'Socket 1700',30,125,314.99),(13,'AMD','Ryzen 9 5950X',45689,16,32,3.4,4.9,'Socket AM4',64,105,375.72),(14,'Intel','Core i7-13700K',46580,16,24,3.4,5.4,'Socket 1700',30,125,354.99),(15,'AMD','Ryzen 9 7900X',51966,12,24,4.7,5.6,'Socket AM5',64,170,383.92),(16,'Intel','Core i7-14700K',53758,20,28,3.4,5.6,'Socket 1700',33,125,389.99),(17,'Intel','Core i9-13900K',59396,24,32,3,5.8,'Socket 1700',36,125,499.99),(18,'Intel','Core i9-14900K',61058,24,32,3.2,6,'Socket 1700',36,125,529.99),(19,'AMD','Ryzen 9 7950X3D',62598,16,32,4.2,5.7,'Socket AM5',128,120,580.71),(20,'AMD','Ryzen 9 7950X',62983,16,32,4.5,5.7,'Socket AM5',64,170,549.99);
+INSERT INTO `CPU` VALUES (1,'Intel','Core i5-13400F',25257,10,16,2.5,4.6,20,65,185.99,4,'Intel LGA 1700'),(2,'AMD','Ryzen 5 7600',27263,6,12,3.8,5.1,32,65,198.99,10,'AMD AM5'),(3,'Intel','Core i5-12600K',27749,10,16,3.7,4.9,20,125,169.99,4,'Intel LGA 1700'),(4,'AMD','Ryzen 5 7600X',28605,6,12,4.7,5.3,32,105,209.95,10,'AMD AM5'),(5,'AMD','Ryzen 7 7800X3D',34399,8,16,4.2,5,96,120,357.00,10,'AMD AM5'),(6,'AMD','Ryzen 7 7700',34620,8,16,3.8,5.3,32,65,268.04,10,'AMD AM5'),(7,'Intel','Core i7-12700K',34664,12,20,3.6,5,25,125,224.99,4,'Intel LGA 1700'),(8,'AMD','Ryzen 7 7700X',36043,8,16,4.5,5.4,32,105,309.99,10,'AMD AM5'),(9,'Intel','Core i5-13600K',38181,14,20,3.5,5.1,24,125,284.99,4,'Intel LGA 1700'),(10,'AMD','Ryzen 9 5900X',39197,12,24,3.7,4.8,64,105,279.00,9,'AMD AM4'),(11,'Intel','Core i5-14600K',39322,14,20,3.5,5.3,24,125,309.99,4,'Intel LGA 1700'),(12,'Intel','Core i9-12900K',41377,16,24,3.2,5.2,30,125,314.99,4,'Intel LGA 1700'),(13,'AMD','Ryzen 9 5950X',45689,16,32,3.4,4.9,64,105,375.72,9,'AMD AM4'),(14,'Intel','Core i7-13700K',46580,16,24,3.4,5.4,30,125,354.99,4,'Intel LGA 1700'),(15,'AMD','Ryzen 9 7900X',51966,12,24,4.7,5.6,64,170,383.92,10,'AMD AM5'),(16,'Intel','Core i7-14700K',53758,20,28,3.4,5.6,33,125,389.99,4,'Intel LGA 1700'),(17,'Intel','Core i9-13900K',59396,24,32,3,5.8,36,125,499.99,4,'Intel LGA 1700'),(18,'Intel','Core i9-14900K',61058,24,32,3.2,6,36,125,529.99,4,'Intel LGA 1700'),(19,'AMD','Ryzen 9 7950X3D',62598,16,32,4.2,5.7,128,120,580.71,10,'AMD AM5'),(20,'AMD','Ryzen 9 7950X',62983,16,32,4.5,5.7,64,170,549.99,10,'AMD AM5');
 /*!40000 ALTER TABLE `CPU` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +237,7 @@ CREATE TABLE `GPU` (
   `brand` varchar(255) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
   `score` int DEFAULT NULL,
-  `codaCoreNum` int DEFAULT NULL,
+  `cudaCoreNum` int DEFAULT NULL,
   `baseClock` int DEFAULT NULL,
   `boostClock` int DEFAULT NULL,
   `memory` int DEFAULT NULL,
@@ -305,7 +306,7 @@ CREATE TABLE `Motherboard` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `brand` varchar(255) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
-  `socket` varchar(255) DEFAULT NULL,
+  `socketType` varchar(255) DEFAULT NULL,
   `chipset` varchar(255) DEFAULT NULL,
   `memorySlot` int DEFAULT NULL,
   `clockSpeed` int DEFAULT NULL,
@@ -319,6 +320,7 @@ CREATE TABLE `Motherboard` (
   `supportNVMe` tinyint(1) DEFAULT NULL,
   `formFactor` varchar(255) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
+  `socketId` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `CHK_supportNVMe` CHECK ((`supportNVMe` in (0,1)))
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -330,7 +332,7 @@ CREATE TABLE `Motherboard` (
 
 LOCK TABLES `Motherboard` WRITE;
 /*!40000 ALTER TABLE `Motherboard` DISABLE KEYS */;
-INSERT INTO `Motherboard` VALUES (1,'ASUS','TUF Gaming B650-E WIFI','AMD AM5','AMD B650',4,5200,192,5,2,4,6,3,'(supports PCIe 4.0 x4 mode)',1,'ATX\r',199.99),(2,'ASUS','ROG STRIX B650-A Gaming WIFI 6E','AMD AM5','AMD B650',4,6400,128,5,2,4,6,3,'(supports PCIe 4.0 x4 mode)',1,'ATX\r',259.99),(3,'MSI','GAMING PLUS WIFI','AMD AM5','AMD B650',4,6000,192,5,2,4,6,2,'',1,'ATX\r',169.99),(4,'ASRock','B650M Pro RS WIFI','AMD AM5','AMD B650',4,6000,128,5,2,4,6,3,'',1,'Micro ATX\r',149.99),(5,'Gigabyte','X670E AORUS PRO X','AMD AM5','AMD X670',4,8000,192,5,3,4,6,4,'',1,'ATX\r',299.99),(6,'ASUS','PRIME B450M-A II','AMD AM4','AMD B450',4,4400,128,4,1,6,6,2,'',1,'Micro ATX\r',71.99),(7,'MSI','MAG Z790 TOMAHAWK MAX WIFI','Intel LGA 1700','Intel Z790',4,7800,192,5,2,8,6,4,'',1,'ATX\r',279.99),(8,'ASRock','Z690 PG VELOCITA','Intel LGA 1700','Intel Z690',4,6400,128,5,3,6,6,4,'',1,'ATX\r',149.99),(9,'MSI','B760 GAMING PLUS WIFI','Intel LGA 1700','Intel B760',4,6800,192,5,2,4,6,2,'',1,'ATX\r',159.99),(10,'Gigabyte','H610I','Intel LGA 1700','Intel H610',2,5600,64,5,1,4,6,1,'',0,'ITX',109.99);
+INSERT INTO `Motherboard` VALUES (1,'ASUS','TUF Gaming B650-E WIFI','AMD AM5','AMD B650',4,5200,192,5,2,4,6,3,'(supports PCIe 4.0 x4 mode)',1,'ATX\r',199.99,10),(2,'ASUS','ROG STRIX B650-A Gaming WIFI 6E','AMD AM5','AMD B650',4,6400,128,5,2,4,6,3,'(supports PCIe 4.0 x4 mode)',1,'ATX\r',259.99,10),(3,'MSI','GAMING PLUS WIFI','AMD AM5','AMD B650',4,6000,192,5,2,4,6,2,'',1,'ATX\r',169.99,10),(4,'ASRock','B650M Pro RS WIFI','AMD AM5','AMD B650',4,6000,128,5,2,4,6,3,'',1,'Micro ATX\r',149.99,10),(5,'Gigabyte','X670E AORUS PRO X','AMD AM5','AMD X670',4,8000,192,5,3,4,6,4,'',1,'ATX\r',299.99,10),(6,'ASUS','PRIME B450M-A II','AMD AM4','AMD B450',4,4400,128,4,1,6,6,2,'',1,'Micro ATX\r',71.99,9),(7,'MSI','MAG Z790 TOMAHAWK MAX WIFI','Intel LGA 1700','Intel Z790',4,7800,192,5,2,8,6,4,'',1,'ATX\r',279.99,4),(8,'ASRock','Z690 PG VELOCITA','Intel LGA 1700','Intel Z690',4,6400,128,5,3,6,6,4,'',1,'ATX\r',149.99,4),(9,'MSI','B760 GAMING PLUS WIFI','Intel LGA 1700','Intel B760',4,6800,192,5,2,4,6,2,'',1,'ATX\r',159.99,4),(10,'Gigabyte','H610I','Intel LGA 1700','Intel H610',2,5600,64,5,1,4,6,1,'',0,'ITX',109.99,4);
 /*!40000 ALTER TABLE `Motherboard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,4 +458,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-11 14:27:37
+-- Dump completed on 2024-04-11 18:29:22
