@@ -11,7 +11,12 @@ public class CPUCooler extends Component {
     private Long id;
     private int size;
 //    private String CPUSocket;
-    @OneToMany(mappedBy = "model")
+    @ManyToMany
+    @JoinTable(
+            name = "cpucooler_socketcompatibility", // 联结表名
+            joinColumns = @JoinColumn(name = "cooler_id"), // CPUCooler 表的外键
+            inverseJoinColumns = @JoinColumn(name = "compatibility_id") // SocketCompatibility 表的外键
+    )
     private Set<SocketCompatibility> socketCompatibilitySet;
     private int height;
     private boolean RGB;

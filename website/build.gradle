@@ -30,7 +30,7 @@ dependencies {
 	implementation 'de.codecentric:spring-boot-admin-starter-server'
 	implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-    implementation 'org.projectlombok:lombok:1.18.28'
+    implementation 'mysql:mysql-connector-java:8.0.19'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
