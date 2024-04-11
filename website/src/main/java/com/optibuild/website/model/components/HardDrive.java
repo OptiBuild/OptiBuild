@@ -10,7 +10,6 @@ public class HardDrive extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    protected String type;
     protected String capacity;
     protected float formFactor;
     protected String hdInterface;
@@ -25,14 +24,6 @@ public class HardDrive extends Component {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getCapacity() {

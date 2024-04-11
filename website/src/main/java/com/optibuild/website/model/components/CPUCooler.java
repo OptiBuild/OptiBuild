@@ -13,7 +13,7 @@ public class CPUCooler extends Component {
 //    private String CPUSocket;
     @ManyToMany
     @JoinTable(
-            name = "cpucooler_socketcompatibility", // 联结表名
+            name = "CPUCooler_SocketCompatibility", // 联结表名
             joinColumns = @JoinColumn(name = "cooler_id"), // CPUCooler 表的外键
             inverseJoinColumns = @JoinColumn(name = "compatibility_id") // SocketCompatibility 表的外键
     )

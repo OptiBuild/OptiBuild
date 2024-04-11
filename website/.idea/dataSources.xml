@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Hardware_Components@localhost" uuid="b58eeabc-74fe-45ae-8897-6029f378be49">
+    <data-source source="LOCAL" name="Software_Requirements@localhost" uuid="cb916e3c-4722-44b8-a0ce-67f6e8c90010">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/Hardware_Components</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/Software_Requirements</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="hardware_components@localhost" uuid="f96a3e0c-75d0-44ca-8e09-2375eac5a118">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/hardware_components</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

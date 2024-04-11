@@ -31,7 +31,7 @@ public class MotherboardService {
         if(hardDrive != null) {
             nvme = hardDrive.isNVMe();
         }
-        List<Motherboard> motherboardList = motherboardRepository.findBySocketAndDDRXAndClockspeedGreaterThanAndSupportNVMe(socket, ddr, clockspeed, nvme);
+        List<Motherboard> motherboardList = motherboardRepository.findBySocketTypeAndDDRXAndClockSpeedGreaterThanAndSupportNVMe(socket, ddr, clockspeed, nvme);
         Motherboard motherboard = motherboardList.get(0);
         for (Motherboard mb : motherboardList) {
             double price = motherboard.getPrice();

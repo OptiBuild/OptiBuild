@@ -11,8 +11,11 @@ public class Case extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToMany(mappedBy = "compatibleCases")
-    private Set<Motherboard> compatibleMotherboards = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "Case_FormFactorCompatibility",
+            joinColumns = @JoinColumn(name = "case_id"),
+            inverseJoinColumns = @JoinColumn(name = "formFactorType_id"))
+    private Set<FormFactorCompatibility> formFactorCompatibilitySet = new HashSet<>();
     private int driveBays35;
     private int driveBays25;
     private int maxGPULength;
@@ -49,12 +52,12 @@ public class Case extends Component {
         this.id = id;
     }
 
-    public Set<Motherboard> getCompatibleMotherboards() {
-        return compatibleMotherboards;
+    public Set<FormFactorCompatibility> getFormFactorCompatibilitySet() {
+        return formFactorCompatibilitySet;
     }
 
-    public void setCompatibleMotherboards(Set<Motherboard> compatibleMotherboards) {
-        this.compatibleMotherboards = compatibleMotherboards;
+    public void setFormFactorCompatibilitySet(Set<FormFactorCompatibility> formFactorCompatibilitySet) {
+        this.formFactorCompatibilitySet = formFactorCompatibilitySet;
     }
 
     public int getDriveBays35() {

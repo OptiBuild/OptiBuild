@@ -9,7 +9,7 @@ public class GPU extends Component {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int score;
-    private int codaCoreNum;
+    private int cudaCoreNum;
     private int baseClock;
     private int boostClock;
     private int memory;
@@ -36,12 +36,12 @@ public class GPU extends Component {
         this.score = score;
     }
 
-    public int getCodaCoreNum() {
-        return codaCoreNum;
+    public int getCudaCoreNum() {
+        return cudaCoreNum;
     }
 
-    public void setCodaCoreNum(int codaCoreNum) {
-        this.codaCoreNum = codaCoreNum;
+    public void setCudaCoreNum(int cudaCoreNum) {
+        this.cudaCoreNum = cudaCoreNum;
     }
 
     public int getBaseClock() {

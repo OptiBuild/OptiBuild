@@ -2,6 +2,7 @@ package com.optibuild.website.Service;
 
 import com.optibuild.website.model.components.*;
 import com.optibuild.website.repository.CaseRepository;
+import com.optibuild.website.repository.FormFactorCompatibilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.Set;
 @Service
 public class CaseService {
     private final CaseRepository caseRepository;
+    private final FormFactorCompatibilityRepository formFactorCompatibilityRepository;
     @Autowired
-    public CaseService (CaseRepository caseRepository) {
+    public CaseService (CaseRepository caseRepository, FormFactorCompatibilityRepository formFactorCompatibilityRepository) {
         this.caseRepository = caseRepository;
+        this.formFactorCompatibilityRepository = formFactorCompatibilityRepository;
     }
 
     public Case getCase (GPU gpu, Motherboard motherboard, PowerSupply powerSupply, CPUCooler cpuCooler) {
@@ -31,15 +34,24 @@ public class CaseService {
 
         // Further filter the cases based on motherboard compatibility
         if (motherboard != null) {
+            FormFactorCompatibility formFactorCompatibility = formFactorCompatibilityRepository.findByFormFactorType(formFactor);
+            Set<Case> compatibleCaseSet = formFactorCompatibility.getCompatibleCases();
             List<Case> compatibleCases = new ArrayList<>();
             for (Case aCase : caseList) {
-                Set<Motherboard> compatibleMotherboards = aCase.getCompatibleMotherboards();
-                if (compatibleMotherboards.contains(motherboard)) {
+                if (compatibleCaseSet.contains(aCase)) {
                     compatibleCases.add(aCase);
                 }
             }
             caseList = compatibleCases;
         }
-        return caseList.get(0);
+
+        Case mostAffordableCase = null;
+        for (Case c : caseList) {
+            if (mostAffordableCase == null || c.getPrice() < mostAffordableCase.getPrice()) {
+                mostAffordableCase = c;
+            }
+        }
+
+        return mostAffordableCase;
     }
 }
