@@ -6,6 +6,7 @@ import $ from 'jquery';
 import logo from './images/Logo.jpg';
 import button from './images/button.gif';
 import sta from './images/static.png';
+import axios from 'axios';
 
 function Survey() {
 
@@ -14,6 +15,7 @@ function Survey() {
     const surveycontainerRef = useRef(null);
     const covercontainerRef = useRef(null);
     const colorRef = useRef(null);
+    const [next, setNext] = useState(false);
     const handleButtonClick = () => {
         // Use jQuery to animate the logo element
         // $('.logo').css('position', 'fixed')
@@ -35,7 +37,11 @@ function Survey() {
             }, 500);
             $('.survey-container').css('z-index', '20');
         });
-        nextQuestion();
+        if (!next) {
+            setNext(true);
+        } else {
+            nextQuestion();
+        }
     };
 
     useEffect(() => {
@@ -58,6 +64,11 @@ function Survey() {
             questionText: 'What is your budget?',
             type: 'open-ended'
         },
+        {
+            questionText: 'Do you like to leave your software open?',
+            options: ['Yes', 'No'],
+            type: 'multiple-choice-single'
+        },
         { 
             questionText: 'What specific programs will you be using?', 
             options: ['Adobe Premiere Pro', 'Adobe After Effects', 'Adobe Photoshop', 'General work'], 
@@ -79,16 +90,18 @@ function Survey() {
             type: 'multiple-choice-single'
         },
         {
-            questionText: 'Do you like to leave your software open?',
+            questionText: 'Do you plan to upgrade your PC in the future?',
             options: ['Yes', 'No'],
             type: 'multiple-choice-single'
         },
         {
-            questionText: 'Do you plan to upgrade your PC in the future?',
-            options: ['Yes', 'No'],
+            questionText: 'How many tabs do you like to keep open at once?',
+            options: ['0-15', '15-30', '30-45'],
             type: 'multiple-choice-single'
-        }
+        },
     ];
+
+
 
     const followqs = [
         {
@@ -137,10 +150,21 @@ function Survey() {
             // nextQuestion();
         }
     };
-
+    const [inputError, setInputError] = useState("");
     const handleOpenEndedChange = (e) => {
+        const value = e.target.value;
+        // Check if the input value is numeric (integer) or an empty string
+        if (/^\d*$/.test(value)) {
+            // If numeric, update the answer and clear any error message
+            const updatedAnswers = [...answers];
+            updatedAnswers[currentQuestionIndex] = value;
+            setAnswers(updatedAnswers);
+            setInputError(""); // Clear any error message
+        } else {
+            // If not numeric, set an error message but still allow the input for user correction
+            setInputError("Please enter a valid number.");
+        }
         const updatedAnswers = [...answers];
-        console.log(e.target.value);
         updatedAnswers[currentQuestionIndex] = e.target.value;
         setAnswers(updatedAnswers);
     };
@@ -148,19 +172,44 @@ function Survey() {
     const nextQuestion = () => {
         if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setActiveOption(null);
         }
         // } else {
         //   handleSubmit(); // Call submit function when reaching the end of the questions
         // }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Final submission logic, e.g., send answers to a backend or show a summary
         console.log('Survey completed. Answers:', answers);
-        navigate('/submission');   
+        // Add this function inside your Survey component
+        // try {
+        //     const response = await axios.post('http://optibuild/api/questions', {
+        //         answers: answers,
+        //         // Include any other data you need to send
+        //     });
+        //     console.log('Survey submitted successfully:', response.data);
+        //     navigate('/submission', { state: { data: response.data } }); // Navigate to a submission success page
+        // } catch (error) {
+        //     console.error('Failed to submit survey:', error);
+        //     // Handle errors, perhaps show a message to the user
+        // }
+        const url = 'https://sincere-accurately-foal.ngrok-free.app/questions';
+        axios.post(url, answers)
+            .then(response => {
+                // Handle response
+                console.log(response.data);
+            })
+            .catch(error => {
+                // Handle error
+                console.error("There was an error!", error);
+            });
+        navigate('/submission')
+        // navigate('/submission', { state: { data: response.data } });   
     };
 
     const renderQuestionInput = (e) => {
+        console.log(currentQuestionIndex);
         if(e == 0){
             const question = questions[currentQuestionIndex];
             if (question.type === 'multiple-choice-single') {
@@ -176,7 +225,7 @@ function Survey() {
                 <div className="options-container">
                     <div key={option} className='option' style={{marginRight: '10px' }}>
                     <input 
-                        class='checkbox'
+                        className='checkbox'
                         type='checkbox'
                         id={option}
                         name={option}
@@ -190,11 +239,12 @@ function Survey() {
             } else if (question.type === 'open-ended') {
             return (
                 <div>
-                <input class='open-input'
+                <input className='open-input'
                 type='text'
                 value={answers[currentQuestionIndex]}
                 onChange={handleOpenEndedChange}
                 />
+                {inputError && <div style={{color: 'red'}}>{inputError}</div>} {/* Display error message */}
                 </div>
             );
             }
@@ -203,22 +253,22 @@ function Survey() {
 
 
     return (
-        <div class='container'>
+        <div className='container'>
             <ProgressBar progress={progress} />
-            <div ref={covercontainerRef} class='cover-container'>
-                <div class='image-container'>
-                    <img ref={logoRef}  class='logo' src={logo}></img>
-                    <div ref={buttonRef} class='button-container'>
-                        <img id='animates' class='gif' src={button}></img>
-                        <img id='static' class='gif' src={sta}></img>
-                        <button class='btn' onClick={handleButtonClick} />
+            <div ref={covercontainerRef} className='cover-container'>
+                <div className='image-container'>
+                    <img ref={logoRef}  className='logo' src={logo}></img>
+                    <div ref={buttonRef} className='button-container'>
+                        <img id='animates' className='gif' src={button}></img>
+                        <img id='static' className='gif' src={sta}></img>
+                        <button className='btn' onClick={handleButtonClick} />
                     </div>
                 </div>
             </div>
-            <div ref={surveycontainerRef} id='survey' class='survey-container'>
-                <div class='question-container'>
+            <div ref={surveycontainerRef} id='survey' className='survey-container'>
+                <div className='question-container'>
                     <h2>{questions[currentQuestionIndex].questionText}</h2>
-                    <div class='question-render'>{renderQuestionInput(0)}</div>
+                    <div className='question-render'>{renderQuestionInput(0)}</div>
                     {currentQuestionIndex < questions.length - 1 ? (
                         // questions[currentQuestionIndex].type !== 'multiple-choice-single' ? 
                         //     <button onClick={nextQuestion}>Skip</button>

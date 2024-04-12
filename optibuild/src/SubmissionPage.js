@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Submission.css';
+import { useLocation } from 'react-router-dom';
 
 function Submission() {
+
+  // const location = useLocation();
+  // const datas = location.state.data;
+  // console.log(datas)
+
     useEffect(() => {
         // Set the body background color to white using hexadecimal
         document.body.style.backgroundColor = '#202e3b'; // White color
@@ -20,7 +26,7 @@ function Submission() {
             setSelectedCell(cellData); // Then, set the new cell data after a short delay
           }, 10); 
         // setSelectedCell(cellData);
-      }
+    }
 
     const data = [{ 
         'CPU': 'AMD Ryzen 3800X', 
@@ -37,7 +43,6 @@ function Submission() {
     function VerticalTable({ data, onCellClick }) {
         // Assuming `data` is an array of objects, and we take the first one to create headers
         const headers = Object.keys(data[0]);
-        console.log('header is:', headers);
         return (
           <table>
             <tbody>
@@ -66,6 +71,7 @@ function Submission() {
                 <div className='pop-out-table'>
                     <h1>Options</h1>
                     <p><strong>Current {selectedCell.header}:</strong> {selectedCell.value}</p>
+                    <a href="https://www.amazon.com/AMD-Ryzen-5800X-16-Thread-Processor/dp/B0815XFSGK/ref=sr_1_3?dib=eyJ2IjoiMSJ9.NvasPuvyAu0Xd0EoYZ_S3gqRI6EENJiqccVTjIuwQJz0LjS6Q8f27IKYcS1OnCeap-Ef3vfgsy3Q1EQ118aYEy_Yvt_LMTK4yhh2O3DQ5srHZ7Jpd5U1NhdXTYdf-_-EtNFKILk9Y19cQ32LYaYAtvqZkdzSvOfsrSejN_AN2INYKdF76gaDYZ9CMYwv74koMnJsA9CSCCe91GxeSaJbMYWWM7ltcg4666aE5V4X8lA.lFdSZLJy-B0D1_thzE9xU-GU7QYa_p40WMkuKGWDldQ&dib_tag=se&keywords=AMD%2BRyzen%2B3800X&qid=1712825099&sr=8-3&th=1"><strong>Link</strong></a>
                     {/* Render additional details or another table based on selectedCell */}
                     <table>
                         <thead>

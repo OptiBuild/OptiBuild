@@ -3,8 +3,8 @@ import './ProgressBar.css'; // Assuming you will define styles in ProgressBar.cs
 
 const ProgressBar = ({ progress }) => {
   return (
-    <div class="progress-container" style={{ width: `${progress}%` }}>
-      <div class="progress-bar"></div>
+    <div className="progress-container" style={{ width: `${progress}%` }}>
+      <div className="progress-bar"></div>
     </div>
   );
 };

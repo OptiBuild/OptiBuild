@@ -57,3 +57,29 @@ p {
 .pop-out-table-visible {
     opacity: 1;
 }
+
+a:link { 
+    text-decoration: none; 
+    color: #dd5;
+} 
+
+/* unvisited link */
+a:link {
+    text-decoration: none;
+    color: #dd5;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #dd5;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: #dd5;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #dd5;
+  }
