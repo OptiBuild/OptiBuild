@@ -260,16 +260,16 @@ INSERT INTO `GPU` VALUES (3,'NVIDIA','GeForce RTX 4090',38765,16384,2230000,2520
 UNLOCK TABLES;
 
 --
--- Table structure for table `HardDrives`
+-- Table structure for table `HardDrive`
 --
 
-DROP TABLE IF EXISTS `HardDrives`;
+DROP TABLE IF EXISTS `HardDrive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `HardDrives` (
+CREATE TABLE `HardDrive` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `type` varchar(50) DEFAULT NULL,
-  `capacity` varchar(255) DEFAULT NULL,
+  `capacityList` varchar(255) DEFAULT NULL,
   `formFactor` float DEFAULT NULL,
   `hdInterface` varchar(255) DEFAULT NULL,
   `NVMe` tinyint(1) DEFAULT NULL,
@@ -286,13 +286,38 @@ CREATE TABLE `HardDrives` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `HardDrives`
+-- Dumping data for table `HardDrive`
 --
 
-LOCK TABLES `HardDrives` WRITE;
-/*!40000 ALTER TABLE `HardDrives` DISABLE KEYS */;
-INSERT INTO `HardDrives` VALUES (1,'HDD','4TB,8TB',3.5,'SATA III',4,'Seagate','FireCuda HDD',101.00,260,256,0,0,'\r'),(2,'HDD','500GB, 1TB, 2TB, 4TB, 6TB, 8TB, 10TB',3.5,'SATA III',4,'WD','Black HDD',76.99,263,256,0,0,'\r'),(3,'HDD','500GB, 1TB, 3TB',3.5,'SATA III',4,'WD','Blue HDD',30.85,185,128,0,0,'\r'),(4,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'Seagate','IronWolf Pro HDD',110.19,0,256,0,0,'\r'),(5,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'WD','Red Pro HDD',400.99,0,512,0,0,'\r'),(6,'HDD','4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB',3.5,'SATA III',4,'Toshiba','N300 Pro ',186.64,0,512,0,0,'\r'),(7,'SSD','4TB, 2TB, 1TB',2280,'M.2',0,'WD','BLACK SN850X NVMe',94.99,0,0,7300,6300,'3D NAND TLC\r'),(8,'SSD','2TB, 1TB',2280,'M.2',0,'Samsung','990 EVO',94.99,0,0,5000,4200,'V-NAND TLC\r'),(9,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','T-FT-FORCE VULCAN Z',54.99,0,0,550,500,'3D NAND\r'),(10,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','CX2',57.99,0,0,540,490,'3D TLC\r'),(11,'SSD','1TB, 500GB, 250GB',2280,'M.2',0,'Samsung','980',99.99,0,0,3500,3000,'V-NAND MLC');
-/*!40000 ALTER TABLE `HardDrives` ENABLE KEYS */;
+LOCK TABLES `HardDrive` WRITE;
+/*!40000 ALTER TABLE `HardDrive` DISABLE KEYS */;
+INSERT INTO `HardDrive` VALUES (1,'HDD','4TB,8TB',3.5,'SATA III',4,'Seagate','FireCuda HDD',25.25,260,256,0,0,'\r'),(2,'HDD','500GB, 1TB, 2TB, 4TB, 6TB, 8TB, 10TB',3.5,'SATA III',4,'WD','Black HDD',38.50,263,256,0,0,'\r'),(3,'HDD','500GB, 1TB, 3TB',3.5,'SATA III',4,'WD','Blue HDD',30.85,185,128,0,0,'\r'),(4,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'Seagate','IronWolf Pro HDD',55.10,0,256,0,0,'\r'),(5,'HDD','2TB, 4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB, 22TB',3.5,'SATA III',4,'WD','Red Pro HDD',33.42,0,512,0,0,'\r'),(6,'HDD','4TB, 6TB, 8TB, 10TB, 12TB, 14TB, 16TB, 18TB, 20TB',3.5,'SATA III',4,'Toshiba','N300 Pro ',31.11,0,512,0,0,'\r'),(7,'SSD','4TB, 2TB, 1TB',2280,'M.2',0,'WD','BLACK SN850X NVMe',94.99,0,0,7300,6300,'3D NAND TLC\r'),(8,'SSD','2TB, 1TB',2280,'M.2',0,'Samsung','990 EVO',94.99,0,0,5000,4200,'V-NAND TLC\r'),(9,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','T-FT-FORCE VULCAN Z',54.99,0,0,550,500,'3D NAND\r'),(10,'SSD','2TB, 1TB, 512GB, 480GB, 256GB, 240GB',2.5,'SATA III',3,'Team Group','CX2',57.99,0,0,540,490,'3D TLC\r'),(11,'SSD','1TB, 500GB, 250GB',2280,'M.2',0,'Samsung','980',99.99,0,0,3500,3000,'V-NAND MLC');
+/*!40000 ALTER TABLE `HardDrive` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `HardDrive_Capacity`
+--
+
+DROP TABLE IF EXISTS `HardDrive_Capacity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `HardDrive_Capacity` (
+  `hardDrive_id` bigint NOT NULL,
+  `capacity` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`hardDrive_id`,`capacity`),
+  CONSTRAINT `harddrive_capacity_ibfk_1` FOREIGN KEY (`hardDrive_id`) REFERENCES `HardDrive` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `HardDrive_Capacity`
+--
+
+LOCK TABLES `HardDrive_Capacity` WRITE;
+/*!40000 ALTER TABLE `HardDrive_Capacity` DISABLE KEYS */;
+INSERT INTO `HardDrive_Capacity` VALUES (1,4.00),(1,8.00),(2,0.50),(2,1.00),(2,2.00),(2,4.00),(2,6.00),(2,8.00),(2,10.00),(3,0.50),(3,1.00),(3,3.00),(4,2.00),(4,4.00),(4,6.00),(4,8.00),(4,10.00),(4,12.00),(4,14.00),(4,16.00),(4,18.00),(4,20.00),(4,22.00),(5,2.00),(5,4.00),(5,6.00),(5,8.00),(5,10.00),(5,12.00),(5,14.00),(5,16.00),(5,18.00),(5,20.00),(5,22.00),(6,4.00),(6,6.00),(6,8.00),(6,10.00),(6,12.00),(6,14.00),(6,16.00),(6,18.00),(6,20.00),(7,1.00),(7,2.00),(7,4.00),(8,1.00),(8,2.00),(9,0.24),(9,0.26),(9,0.48),(9,0.51),(9,1.00),(9,2.00),(10,0.24),(10,0.26),(10,0.48),(10,0.51),(10,1.00),(10,2.00),(11,0.25),(11,0.50),(11,1.00);
+/*!40000 ALTER TABLE `HardDrive_Capacity` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -458,4 +483,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-11 18:29:22
+-- Dump completed on 2024-04-12 18:23:03
