@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class HardDriveService {
@@ -36,7 +37,7 @@ public class HardDriveService {
         double hddPrice = 0;
         double ssdPrice = 0;
         if (size >= 4*1024) {
-            hdd = findLowestPrice("HDD", "2TB", hddPrice);
+            hdd = findLowestPrice("HDD", "4TB", hddPrice);
             ssd = findLowestPrice("SSD", "2TB", ssdPrice);
         } else if (size >= 2*1024) {
             hdd = findLowestPrice("HDD", "2TB", hddPrice);
@@ -52,30 +53,48 @@ public class HardDriveService {
             ssd = findLowestPrice("SSD", "500GB", ssdPrice);
         }
         price = hddPrice + ssdPrice;
-        return hdd+","+ssd;
+        if (hdd == null && ssd == null) {
+            return null;
+        } else if (hdd == null) {
+            return ssd;
+        } else if (ssd == null) {
+            return hdd;
+        } else {
+            return hdd+","+ssd;
+        }
     }
 
     private String findLowestPrice(String type, String capacity, double price) {
-        if (type == "HDD") {
+        if (Objects.equals(type, "HDD")) {
             List<HDD> hdds = hardDriveRepository.findHDDByCapacity(capacity);
-            HDD lowestPriceHDD = hdds.get(0);
-            for(HDD hdd : hdds) {
-                if(hdd.getPrice()<lowestPriceHDD.getPrice()) {
-                    lowestPriceHDD = hdd;
-                    price = hdd.getPrice();
+            if (hdds.isEmpty()) {
+                return null;
+            } else {
+                HDD lowestPriceHDD = hdds.get(0);
+                for(HDD hdd : hdds) {
+                    if(hdd.getPrice()<lowestPriceHDD.getPrice()) {
+                        lowestPriceHDD = hdd;
+                        price = hdd.getPrice();
+                    }
                 }
+                return lowestPriceHDD.getBrand()+lowestPriceHDD.getModel();
             }
-            return lowestPriceHDD.getBrand()+lowestPriceHDD.getModel();
+
         } else {
             List<SSD> ssds = hardDriveRepository.findSSDByCapacityAndHdInterface(capacity, "M.2");
-            SSD lowestPriceSSD = ssds.get(0);
-            for(SSD ssd : ssds) {
-                if(ssd.getPrice()< lowestPriceSSD.getPrice()) {
-                    lowestPriceSSD = ssd;
-                    price = ssd.getPrice();
+            if(ssds.isEmpty()) {
+                return null;
+            } else {
+                SSD lowestPriceSSD = ssds.get(0);
+                for(SSD ssd : ssds) {
+                    if(ssd.getPrice()< lowestPriceSSD.getPrice()) {
+                        lowestPriceSSD = ssd;
+                        price = ssd.getPrice();
+                    }
                 }
+                return lowestPriceSSD.getBrand()+lowestPriceSSD.getModel();
             }
-            return lowestPriceSSD.getBrand()+lowestPriceSSD.getModel();
+
         }
     }
 }
