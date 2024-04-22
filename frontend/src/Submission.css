@@ -19,6 +19,8 @@ table {
   
 table, th, td {
     padding: 8px;
+    padding-left: 0px;
+    margin-top: 10px;
     border: none;
     text-align: left;
 }
@@ -49,7 +51,7 @@ p {
 .pop-out-table {
     position: relative;
     left: 500px;
-    top: -370px;
+    top: -350px;
     opacity: 0;
     animation: fadeIn 0.2s ease-in-out forwards;
 }
@@ -82,4 +84,8 @@ a:link {
   /* selected link */
   a:active {
     color: #dd5;
+  }
+
+  .popout {
+    padding-left: 0;
   }

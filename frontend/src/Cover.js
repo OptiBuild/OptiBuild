@@ -56,6 +56,7 @@ function Cover() {
     return(
         <div class='cover-container'>
             <div class='image-container'>
+                <p>A more personal recommendation</p>
                 <img ref={logoRef}  class='logo' src={logo}></img>
                 <div ref={buttonRef} class='button-container'>
                     <img id='animates' class='gif' src={button}></img>

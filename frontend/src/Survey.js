@@ -12,6 +12,7 @@ function Survey() {
 
     const logoRef = useRef(null);
     const buttonRef = useRef(null);
+    const sloganRef = useRef(null);
     const surveycontainerRef = useRef(null);
     const covercontainerRef = useRef(null);
     const colorRef = useRef(null);
@@ -37,6 +38,11 @@ function Survey() {
             }, 500);
             $('.survey-container').css('z-index', '20');
         });
+
+        $(sloganRef.current).animate({
+            opacity: '0',
+        }, 300);
+
         if (!next) {
             setNext(true);
         } else {
@@ -258,6 +264,7 @@ function Survey() {
             <div ref={covercontainerRef} className='cover-container'>
                 <div className='image-container'>
                     <img ref={logoRef}  className='logo' src={logo}></img>
+                    <h2 ref={sloganRef} className='slogan'>A more personal recommendation</h2>
                     <div ref={buttonRef} className='button-container'>
                         <img id='animates' className='gif' src={button}></img>
                         <img id='static' className='gif' src={sta}></img>
