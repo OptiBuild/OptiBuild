@@ -53,10 +53,10 @@ public class ProcessAnswerService {
         //Question2: Do you like to leave your software running? (CPU)
         index++;
         boolean leaveRunning = processBooleanQuestion(answers.get(index));
-        if (leaveRunning) {
-            index++;
-            leaveRunning = processBooleanQuestion(answers.get(index));
-        }
+//        if (leaveRunning) {
+//            index++;
+//            leaveRunning = processBooleanQuestion(answers.get(index));
+//        }
         List<String> cpu = new ArrayList<>();
         if (leaveRunning) {
             cpu.add("Core i7-14700K");
@@ -113,7 +113,9 @@ public class ProcessAnswerService {
         parseAnswer.add(ram);
 
         //process game list
-        processGameList(gamelist, parseAnswer);
+        if (index == 8) {
+            processGameList(gamelist, parseAnswer);
+        }
 
         return parseAnswer;
     }
