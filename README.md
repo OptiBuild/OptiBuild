@@ -29,7 +29,11 @@ Each of these components is styled with its corresponding CSS file.
 - **Hardware_Components:** This hardware components database includes the tables of all types of hardware components and their various characteristics, used for compatibility checking and comparisons and evalutions between the component type. 
 - **Software_Requirements:** This software requirements databse includes the tables for different software types and their various characteristics. These will outline the core hardware components to run well for base and recommended use cases. Currently, only contains game requirements.
 
+### Hardware Database Entity Relationship
+![alt text](https://github.com/OptiBuild/OptiBuild/blob/main/databases/images/Hardware_Components.png)
 
+### Game Requirements
+![alt text](https://github.com/OptiBuild/OptiBuild/blob/main/databases/images/Game_Requirements_Table.png)
 
 ## How to use MySQL on command line
 login to mysql on command line
