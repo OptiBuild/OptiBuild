@@ -116,3 +116,19 @@ Start the whole client application (React SocketCounter.js and Client.js) by run
 3. Commit your changes.
 4. Push to the branch.
 5. Create a new Pull Request.
+
+## Authors and Acknowledgment
+
+Xinye(Sherry) Miao, Albert You, Heng Meng (Donny) Lee, Tze Fung (Daniel) Wong 
+
+## Contact Information
+
+ Xinye Miao: xmiao39@gatech.edu
+
+## FAQs
+
+Answers to frequently asked questions.
+
+## Changelog
+
+A log or history of changes made to the project.
