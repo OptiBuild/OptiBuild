@@ -24,6 +24,25 @@ This project is a web application developed using React.js. It includes several 
 
 Each of these components is styled with its corresponding CSS file.
 
+## Database Description
+
+- **Hardware_Components:** This hardware components database includes the tables of all types of hardware components and their various characteristics, used for compatibility checking and comparisons and evalutions between the component type. 
+- **Software_Requirements:** This software requirements databse includes the tables for different software types and their various characteristics. These will outline the core hardware components to run well for base and recommended use cases. Currently, only contains game requirements.
+
+### Hardware Database Entity Relationship
+![alt text](https://github.com/OptiBuild/OptiBuild/blob/main/databases/images/Hardware_Components.png)
+
+### Game Requirements
+![alt text](https://github.com/OptiBuild/OptiBuild/blob/main/databases/images/Game_Requirements_Table.png)
+
+## How to use MySQL on command line
+login to mysql on command line
+* mysql -u root -p
+
+If you want to import existing .sql file, you have to (First create database with database_name if not done so already):
+* cd path to your file
+* mysql -u username -p database_name < file_name.sql
+
 ## Installation Instructions
 
 ### Back End
