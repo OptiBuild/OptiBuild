@@ -1,6 +1,8 @@
 # OptiBuild Project
 
-## Overview
+## Project Description
+
+Optibuild serves to provide a personal list of computer component recommendations. We aim to have a more extensive compatibility checker, narrowing down a list of components for users by asking what they use their computer for.
 
 ## Back End Description
 
@@ -24,9 +26,11 @@ Each of these components is styled with its corresponding CSS file.
 
 ## Running the Application
 
-Please follow the instructions below to run the server and frontend sequentially:
 
-## Running the Server
+
+## Installation Instructions
+
+### Back End
 
 ### 1. Install ngrok
 
@@ -38,38 +42,7 @@ https://dashboard.ngrok.com/get-started/setup/windows
 
 If you haven't already installed Java JDK, follow the installation instructions for your operating system. You can find the appropriate Java JDK for your system [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 
-### 3. Set up Local MySQL Schema
-
-Create the necessary schema in your local MySQL database. You can create it manually.
-
-### 4. Start the Application
-
-First, make sure you are in the project directory and the project has been compiled.
-
-Run the following command to start the server:
-
-```
-gradle build
-java -jar website.jar
-```
-
-### 5. Start ngrok Tunnel
-
-Start an ngrok tunnel from the command line to map your local server to a public URL:
-
-```
-ngrok http --domain=sincere-accurately-foal.ngrok-free.app 8080
-```
-
-### 6. Confirm Server Running
-
-Access the generated ngrok URL or any other relevant URL to confirm that the server is running successfully. You can also check the server logs for confirmation.
-
-Your server should now be running successfully and accessible via the public URL!
-
-### Running the Front End
-
-### Installation
+### Front End
 
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
@@ -82,6 +55,53 @@ Start the whole client application (React SocketCounter.js and Client.js) by run
 **Make sure to adjust the IP address and port number in Client.js to the specified server location.**
 
 ## Usage
+
+Please follow the instructions below to run the server and frontend sequentially:
+
+### Running the Back End
+
+### 1. Set up Local MySQL Schema
+
+Create the necessary schema in your local MySQL database. You can create it manually.
+
+![image-20240425155112292](C:\Users\xinye\AppData\Roaming\Typora\typora-user-images\image-20240425155112292.png)
+
+![image-20240425155208645](C:\Users\xinye\AppData\Roaming\Typora\typora-user-images\image-20240425155208645.png)
+
+Please configure according to your local port and address, then click 'Test Connection' to ensure the connection is successful, and then click 'OK'.
+
+### 2. Start the Application
+
+First, make sure you are in the project directory and the project has been compiled.
+
+Run the following command to start the server:
+
+```
+gradle build
+java -jar website.jar
+```
+
+### 3. Start ngrok Tunnel
+
+Start an ngrok tunnel from the command line to map your local server to a public URL:
+
+```
+ngrok http --domain=sincere-accurately-foal.ngrok-free.app 8080
+```
+
+### 4. Confirm Server Running
+
+Access the generated ngrok URL or any other relevant URL to confirm that the server is running successfully. You can also check the server logs for confirmation.
+
+Your server should now be running successfully and accessible via the public URL!
+
+### Running the Front End
+
+Start the frontend by running `npm start` in the project directory. Open your web browser and go to http://localhost:3000 to view the application.
+
+Start the whole client application (React SocketCounter.js and Client.js) by running `npm concurrent start`
+
+**Make sure to adjust the IP address and port number in Client.js to the specified server location.**
 
 * Cover Component: Interact with the cover page to navigate through to the survey component. 
 * Survey Component: Fill in the required fields to simulate the answering process.
