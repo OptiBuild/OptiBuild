@@ -24,10 +24,6 @@ This project is a web application developed using React.js. It includes several 
 
 Each of these components is styled with its corresponding CSS file.
 
-## Running the Application
-
-
-
 ## Installation Instructions
 
 ### Back End
@@ -64,9 +60,9 @@ Please follow the instructions below to run the server and frontend sequentially
 
 Create the necessary schema in your local MySQL database. You can create it manually.
 
-![image-20240425155112292](C:\Users\xinye\AppData\Roaming\Typora\typora-user-images\image-20240425155112292.png)
+![setupdb1](images/setupdb1.png)
 
-![image-20240425155208645](C:\Users\xinye\AppData\Roaming\Typora\typora-user-images\image-20240425155208645.png)
+![setupdb2](images/setupdb2.png)
 
 Please configure according to your local port and address, then click 'Test Connection' to ensure the connection is successful, and then click 'OK'.
 
