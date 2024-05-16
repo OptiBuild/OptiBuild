@@ -1,0 +1,285 @@
+/* @font-face {
+    font-family: 'Mundial';
+    src: url('../fonts/MundialRegular.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+} */
+  
+body {
+margin: 0;
+/* background: #25A3FF; */
+/* font-family: 'Mundial', normal; */
+/* font-family: 'Courier New', monospace; */
+height: 100%;
+}
+
+.slogan {
+    position: relative;
+    top: -170px;
+    font-size: 20px;
+    opacity: 100;
+}
+
+h2 {
+    color: white;
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+label {
+    color: white;
+}
+
+input {
+    border: none;
+}
+
+.survey-container {
+    width: 700px;
+    left: 400px;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    text-align: center; /* Center text for aesthetic reasons */
+    opacity: 0;
+}
+
+.question-container {
+    display: relative;
+    z-index: 20;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Maximize space between question and options */
+    min-height: 200px; /* Adjust based on your needs for spacing */
+    align-items: center;
+}
+
+button {
+    width: 100px;
+    margin-top: 10px;
+    border: none;
+    margin-right: 5px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: lightgray;
+    transition: 0.2s;
+}
+
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: flex-end; /* Align the progress bar to the bottom */
+}
+
+.progress-bar {
+    height: 5px; /* Or any other height depending on your design */
+    background-color: #4CAF50; /* Progress bar color */
+    width: 0%; /* Initial width */
+    transition: width 0.5s ease-in-out; /* Smooth transition for width change */
+}
+
+.open-input {
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.multi-input {
+    display: flex;
+    flex-direction: row;
+}
+
+.question-render {
+    display: flex;
+    justify-content: center; 
+}
+
+input:checked {
+    background-color: purple;
+}
+
+/* 
+/* <label className="custom-checkbox">
+  Your Label Here
+  <input type="checkbox" checked={isChecked} onChange={handleChange} />
+  <span className="checkmark"></span>
+</label> */
+
+.cover-container {
+    position: relative;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use the full height of the viewport */
+    text-align: center; /* Center text for aesthetic reasons */
+    z-index: 20;
+}
+
+.cover-logo {
+    width: 500px;
+    height: 500px;
+}
+
+.button-container {
+    position: relative;
+    top: 70px;
+    height: 50px;
+    width: 50px;
+    transition: top 0.5s, left 0.5s;
+}
+
+.button-container:hover #static {
+    display: none;
+}
+
+.button-container:hover #animates {
+    display: inline;
+}
+
+.logo {
+    position: relative;
+    /* top: 100px;
+    left: 505px; */
+    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
+    /* Initial size of the logo */
+    width: 500px;
+    height: 500px; /* Center the logo */
+    /* Other initial styles for the logo */
+}
+
+.btn {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    opacity: 0;
+    margin: 0;
+}
+
+.gif {
+    position: absolute;
+    height: 200px;
+    /* top: -67px;
+    left: -110px; */
+}
+  
+.logo-small {
+    width: 200px; /* Smaller size */
+    position: fixed; /* Position it relative to the viewport */
+    top: 0;
+    left: 0;
+    transform: translate(0, 0); 
+    transition: all 0.7s ease-in-out;
+    /* You can also add additional transformations if needed */
+}
+
+#animates {
+    display: none;
+}
+
+.btn:hover #static {
+    display: none;
+}
+
+.skipbutton {
+    background: none;
+    border-bottom: solid;
+    border-radius: 0px;
+    color: white;
+    width: 60px;
+    font-size: 20px;
+}
+
+.skipbutton:hover {
+    background: none;
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between options as needed */
+}
+  
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px; /* Adjust width as needed */
+    height: 60px; /* Adjust height as needed */
+    border: 2px solid #ccc; /* Adjust border color as needed */
+    border-radius: 10px; /* Optional for rounded corners */
+    overflow: hidden; /* Ensures content does not flow outside the border */
+    position: relative;
+}
+  
+.checkbox {
+    appearance: none; /* Hides the default checkbox */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1; /* Lower z-index than label */
+    cursor: pointer;
+    opacity: 0; /* Makes the checkbox invisible but clickable */
+}
+  
+.label {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0; /* Ensure the label is under the checkbox */
+    pointer-events: none; /* Ensure clicks pass through to the checkbox */
+    transition: background-color 0.2s; /* Smooth background color transition */
+    font-size: 16px; /* Adjust label font size as needed */
+    background-color: #fff; /* Initial background color */
+}
+  
+  /* Corrected color value for the checked state */
+.checkbox:checked + .label {
+    background-color: #34495E; /* This should be a valid color value */
+    /* Add any other styles you want to apply to the label when the checkbox is checked */
+    color: white;
+}
+  
+  
+.multiple-button {
+    /* your base button styles */
+    transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+.multiple-button.active.active {
+background-color: darkgrey; /* This will be applied when the button is active */
+}  
+
+
+
+/* #static {
+    display: none;
+} */
+
+
+/* style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', transition: 'width 0.5s, top 0.5s, left 0.5s' } */
