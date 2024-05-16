@@ -7,15 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "`case`")
+@Table(name = "computercase")
 public class Case extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToMany
-    @JoinTable(name = "Case_FormFactorCompatibility",
+    @JoinTable(name = "computercase_formfactorcompatibility",
             joinColumns = @JoinColumn(name = "case_id"),
-            inverseJoinColumns = @JoinColumn(name = "formFactorType_id"))
+            inverseJoinColumns = @JoinColumn(name = "form_factor_type_id"))
     private Set<FormFactorCompatibility> formFactorCompatibilitySet = new HashSet<>();
     private int driveBays35;
     private int driveBays25;

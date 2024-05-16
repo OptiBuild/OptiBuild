@@ -4,6 +4,7 @@ import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "powersupply")
 public class PowerSupply extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,7 +12,8 @@ public class PowerSupply extends Component {
     private String type;
     private int maxPower;
     private int maxPSULength;
-    private PowerSupplyModular modular;
+//    private PowerSupplyModular modular;
+    private String modular;
 
     public PowerSupply() {
     }
@@ -48,11 +50,11 @@ public class PowerSupply extends Component {
         this.maxPSULength = maxPSULength;
     }
 
-    public PowerSupplyModular getModular() {
+    public String getModular() {
         return modular;
     }
 
-    public void setModular(PowerSupplyModular modular) {
+    public void setModular(String modular) {
         this.modular = modular;
     }
 }

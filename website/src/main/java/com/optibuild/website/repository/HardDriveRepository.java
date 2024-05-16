@@ -17,5 +17,5 @@ public interface HardDriveRepository extends JpaRepository<HardDrive, Long> {
     @Query("SELECT s FROM HardDrive s WHERE TYPE(s) = SSD AND s.capacity = ?1 AND s.hdInterface = ?2")
     List<SSD> findSSDByCapacityAndHdInterface(String capacity, String hdInterface);
 
-    HardDrive findBymodel(String hardDrive);
+    HardDrive findBymodel(String model);
 }

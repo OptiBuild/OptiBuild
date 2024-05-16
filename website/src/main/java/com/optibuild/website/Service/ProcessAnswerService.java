@@ -5,6 +5,8 @@ import com.optibuild.website.model.GameRequirement;
 import com.optibuild.website.repository.GameRequirementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 @Service
 public class ProcessAnswerService {
     //inject repository
+    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
     private final GameRequirementRepository gameRequirementRepository;
 
     @Autowired
@@ -53,6 +56,7 @@ public class ProcessAnswerService {
         //Question2: Do you like to leave your software running? (CPU)
         index++;
         boolean leaveRunning = processBooleanQuestion(answers.get(index));
+
         if (leaveRunning) {
             index++;
             leaveRunning = processBooleanQuestion(answers.get(index));
@@ -182,7 +186,7 @@ public class ProcessAnswerService {
     }
 
     private boolean processBooleanQuestion(Answer answer) {
-        return "yes".equals(answer.getChoices().get(0));
+        return "yes".equals(answer.getChoices().get(0))||"Yes".equals(answer.getChoices().get(0));
     }
 
 

@@ -5,17 +5,17 @@ import com.optibuild.website.Service.ProcessAnswerService;
 import com.optibuild.website.model.Answer;
 import com.optibuild.website.model.Component;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.ResponseErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class QuestionController {
     private final ComponentService componentService;
     private final ProcessAnswerService processAnswerService;

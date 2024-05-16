@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PowerSupplyRepository extends JpaRepository<PowerSupply, Long> {
-    List<PowerSupply> findByMaxPowerGreaterThan(int power);
+    List<PowerSupply> findByMaxPowerGreaterThan(int maxPower);
 }
