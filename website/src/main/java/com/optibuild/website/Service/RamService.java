@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class RamService {
+    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
     private final RAMRepository ramRepository;
     @Autowired
     public RamService(RAMRepository ramRepository) {
@@ -16,6 +19,20 @@ public class RamService {
     }
 
     public RAM ramModel(List<String> storageList) {
+        int storage = largestStorage(storageList);
+        List<RAM> ramList = ramRepository.findBySize(storage);
+        if(ramList.isEmpty()){
+            ramList.addAll(ramRepository.findBySizeGreaterThan(storage-1));
+        }
+        // find the ram model with the lowest price
+        RAM ram = findLowerPriceRAMWithSameSize(ramList);
+        if(ram==null){
+            logger.error("No ram found.");
+        }
+        return ram;
+    }
+
+    private int largestStorage(List<String> storageList){
         int storage = 0;
         if (storageList.size() == 1) {
             storage = Integer.parseInt(storageList.get(0));
@@ -28,12 +45,10 @@ public class RamService {
                 }
             }
         }
-        // find the ram model with the lowest price
-        return findLowerPriceRAMWithSameSize(storage);
+        return storage;
     }
 
-    private RAM findLowerPriceRAMWithSameSize(int storage) {
-        List<RAM> ramList = ramRepository.findBySize(storage);
+    private RAM findLowerPriceRAMWithSameSize(List<RAM> ramList) {
         if (ramList.isEmpty()) return null;
 
         RAM lowestPriceRAM = ramList.get(0);
@@ -43,5 +58,18 @@ public class RamService {
             }
         }
         return lowestPriceRAM;
+    }
+
+    public RAM ramModelWithDDRX(List<String> storageList, int ddrx) {
+        int storage = largestStorage(storageList);
+        List<RAM> ramList = ramRepository.findBySizeAndDDRVersion(storage, ddrx);
+        if(ramList.isEmpty()){
+            ramList.addAll(ramRepository.findBySizeGreaterThanAndDDRVersion(storage-1, ddrx));
+        }
+        RAM ram = findLowerPriceRAMWithSameSize(ramList);
+        if(ram==null){
+            logger.error("No ram with DDRVersion: {} found", ddrx);
+        }
+        return ram;
     }
 }

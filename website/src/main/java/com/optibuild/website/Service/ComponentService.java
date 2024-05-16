@@ -38,26 +38,54 @@ public class ComponentService {
         Map<String, String> components = new HashMap<>();
         int index = 1;
         CPU cpu = cpuService.cpuModel(specifications.get(index++));
-        GPU gpu = gpuService.gpuModel(specifications.get(index++));
-
-
-        double hardDrivePrice = 0;
-
-        String hardDrive = hardDriveService.hardDrive(specifications.get(index++), hardDrivePrice);
-
-        RAM ram = ramService.ramModel(specifications.get(index+2));
-        String[] parts;
-        String hdd = "";
-        if(hardDrive != null) {
-            parts = hardDrive.split(",");
-            hdd = parts[0];
+        if (cpu == null) {
+            return getErrorMap("CPU");
         }
 
-        //String ssd = parts[1];
+        GPU gpu = gpuService.gpuModel(specifications.get(index++));
+        if (gpu == null) {
+            return getErrorMap("GPU");
+        }
+
+        double hardDrivePrice = 0;
+        String hardDrive = hardDriveService.hardDrive(specifications.get(index++), hardDrivePrice);
+
+        if (hardDrive == null) {
+            return getErrorMap("HardDrive");
+        }
+
+        List<String> storageList = specifications.get(index+2);
+        RAM ram = ramService.ramModel(storageList);
+        if (ram == null) {
+            return getErrorMap("RAM");
+        }
+
+        String[] parts = hardDrive.split(",");
+        String hdd = parts[0];
+        String ssd = parts[1];
+
         CPUCooler cpuCooler = cpuCoolerService.cpuCooler(cpu);
+        if (cpuCooler == null) {
+            return getErrorMap("CPU Cooler");
+        }
+
         PowerSupply powerSupply = powerSupplyService.powerSupplyModel(cpu, gpu);
+        if (powerSupply == null) {
+            return getErrorMap("Power Supply");
+        }
         Motherboard motherboard = motherboardService.motherboard(cpu,gpu,ram,hardDriveRepository.findBymodel(hdd));
+        if(motherboard==null && ram.getDDRVersion()==4){
+            ram = ramService.ramModelWithDDRX(storageList, 5);
+            motherboard = motherboardService.motherboard(cpu,gpu,ram,hardDriveRepository.findBymodel(hdd));
+        }
+        if (motherboard == null) {
+            return getErrorMap("Motherboard");
+        }
+
         Case computerCase = caseService.getCase(gpu, motherboard, powerSupply, cpuCooler);
+        if (computerCase == null) {
+            return getErrorMap("case");
+        }
 
         double totalPrice = cpu.getPrice() + gpu.getPrice() + ram.getPrice() + hardDrivePrice + cpuCooler.getPrice() + powerSupply.getPrice() + motherboard.getPrice() + computerCase.getPrice();
 
@@ -72,6 +100,12 @@ public class ComponentService {
         components.put("Case", formatComponent(computerCase.getBrand(), computerCase.getModel()));
         components.put("Cost", String.valueOf(totalPrice));
         return components;
+    }
+
+    private Map<String, String> getErrorMap(String componentName) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("Error", "Unable to find a suitable " + componentName);
+        return errorMap;
     }
 
     private String formatComponent(String brand, String model) {
