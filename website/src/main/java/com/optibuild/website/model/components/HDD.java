@@ -5,25 +5,25 @@ import jakarta.persistence.*;
 @Entity
 @DiscriminatorValue("HDD")
 public class HDD extends HardDrive{
-    private int maxTransferRate;
-    private int cache;
+    private Integer maxTransferRate;
+    private Integer cache;
 
     public HDD() {
     }
 
-    public int getMaxTransferRate() {
+    public Integer getMaxTransferRate() {
         return maxTransferRate;
     }
 
-    public void setMaxTransferRate(int maxTransferRate) {
+    public void setMaxTransferRate(Integer maxTransferRate) {
         this.maxTransferRate = maxTransferRate;
     }
 
-    public int getCache() {
+    public Integer getCache() {
         return cache;
     }
 
-    public void setCache(int cache) {
+    public void setCache(Integer cache) {
         this.cache = cache;
     }
 }

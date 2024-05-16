@@ -29,6 +29,7 @@ dependencies {
 	implementation 'de.codecentric:spring-boot-admin-starter-server'
 	implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
     implementation 'mysql:mysql-connector-java:8.0.33'
+	implementation 'ch.qos.logback:logback-classic:1.2.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

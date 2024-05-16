@@ -20,7 +20,7 @@ public class GPUService {
     public GPU gpuModel(List<String> gpuList) {
         GPU gpuModel = null;
         if (gpuList.size() == 1) {
-            if (Objects.equals(gpuList.get(0), "Default")) {
+            if (Objects.equals(gpuList.get(0), "Default")||Objects.equals(gpuList.get(0), "NONE")) {
                 GPU gpu = new GPU();
                 gpu.setModel("N/A");
                 gpu.setBrand("");

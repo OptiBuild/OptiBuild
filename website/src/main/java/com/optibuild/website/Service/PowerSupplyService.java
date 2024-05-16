@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class PowerSupplyService {
+    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
     private final PowerSupplyRepository powerSupplyRepository;
     @Autowired
     public PowerSupplyService (PowerSupplyRepository powerSupplyRepository) {
@@ -25,6 +28,8 @@ public class PowerSupplyService {
         if(gpu != null) {
             power += gpu.getRequestSystemPower();
         }
+        power = Math.min(999, power);
+        logger.info("Find power supply with max power greater than {}.", power);
         List<PowerSupply> powerSupplyList = powerSupplyRepository.findByMaxPowerGreaterThan(power);
         if (!powerSupplyList.isEmpty()) {
             PowerSupply powerSupply = powerSupplyList.get(0);
@@ -36,6 +41,7 @@ public class PowerSupplyService {
             }
             return powerSupply;
         } else {
+            logger.warn("No power supplies found with max power greater than {}.", power);
             return null;
         }
     }

@@ -13,6 +13,7 @@ public class CPU extends Component {
     private int threadNum;
     private float upperClock;
     private float lowerClock;
+    @Column(name = "socketType")
     private String socketType;
     private int L3Cache;
     private int TDP;

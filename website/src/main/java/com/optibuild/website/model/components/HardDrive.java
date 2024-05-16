@@ -4,15 +4,18 @@ import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "harddrives")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public class HardDrive extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     protected String capacity;
     protected float formFactor;
+    @Column(name = "hdInterface")
     protected String hdInterface;
+    @Column(name = "nvme")
     protected boolean NVMe;
 
     public HardDrive() {
