@@ -82,7 +82,8 @@ public class ComponentService {
             return getErrorMap("Motherboard");
         }
 
-        Case computerCase = caseService.getCase(gpu, motherboard, powerSupply, cpuCooler);
+        List<Case> caseList = caseService.getCaseList(gpu, motherboard, powerSupply, cpuCooler);
+        Case computerCase = caseService.getCase(caseList);
         if (computerCase == null) {
             return getErrorMap("case");
         }
@@ -98,6 +99,7 @@ public class ComponentService {
         components.put("PowerSupply", formatComponent(powerSupply.getBrand(), powerSupply.getModel()));
         components.put("Motherboard", formatComponent(motherboard.getBrand(), motherboard.getModel()));
         components.put("Case", formatComponent(computerCase.getBrand(), computerCase.getModel()));
+        
         components.put("Cost", String.valueOf(totalPrice));
         return components;
     }

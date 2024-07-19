@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 @Service
 public class PowerSupplyService {
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(PowerSupplyService.class);
     private final PowerSupplyRepository powerSupplyRepository;
     @Autowired
     public PowerSupplyService (PowerSupplyRepository powerSupplyRepository) {

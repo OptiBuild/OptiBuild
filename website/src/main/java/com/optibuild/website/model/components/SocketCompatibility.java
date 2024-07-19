@@ -4,7 +4,6 @@ import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "socketcompatibility")
 public class SocketCompatibility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

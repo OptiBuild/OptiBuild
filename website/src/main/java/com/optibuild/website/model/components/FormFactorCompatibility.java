@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "formfactorcompatibility")
+@Table(name = "form_factor_compatibility")
 public class FormFactorCompatibility {
     @Id
     @GeneratedValue

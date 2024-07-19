@@ -3,10 +3,10 @@ package com.optibuild.website.Service;
 import com.optibuild.website.model.Answer;
 import com.optibuild.website.model.GameRequirement;
 import com.optibuild.website.repository.GameRequirementRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ProcessAnswerService {
     //inject repository
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProcessAnswerService.class);
     private final GameRequirementRepository gameRequirementRepository;
 
     @Autowired
@@ -23,11 +23,10 @@ public class ProcessAnswerService {
     }
 
     public List<Answer> processAnswers(Object answers) {
-        if (!(answers instanceof List<?>)) {
+        if (!(answers instanceof List<?> answersList)) {
             return null;
         }
 
-        List<?> answersList = (List<?>) answers;
         List<Answer> processedAnswers = new ArrayList<>();
 
         // process different answer types
@@ -37,10 +36,17 @@ public class ProcessAnswerService {
                 choices.add((String) obj);
                 Answer answer = new Answer(processedAnswers.size(), choices);
                 processedAnswers.add(answer);
-            } else if (obj instanceof List<?>) {
-                List<String> choices = (List<String>) obj;
-                Answer answer = new Answer(processedAnswers.size(), choices);
-                processedAnswers.add(answer);
+            } else if (obj instanceof List<?> objList) {
+                if(objList.isEmpty() || objList.get(0) instanceof String){
+                    @SuppressWarnings("unchecked")
+                    List<String> choices = (List<String>) obj;
+                    Answer answer = new Answer(processedAnswers.size(), choices);
+                    processedAnswers.add(answer);
+                } else {
+                    throw new IllegalArgumentException("List contains non-String elements");
+                }
+            } else {
+                throw new IllegalArgumentException("Invalid element type in answersList");
             }
         }
 
@@ -64,10 +70,10 @@ public class ProcessAnswerService {
 
         List<String> cpu = new ArrayList<>();
         if (leaveRunning) {
-            cpu.add("Core i7-14700K");
+            cpu.add("Intel Core i7-14700K");
             //cpu.add("Intel Core i9-14900K");
         } else {
-            cpu.add("Core i5-14600K"); //Default
+            cpu.add("Intel Core i5-14600K"); //Default
         }
         parseAnswer.add(cpu);
 
@@ -87,6 +93,7 @@ public class ProcessAnswerService {
         if(processBooleanQuestion(answers.get(index))) {
             index++;
             gamelist = answers.get(index).getChoices();
+            logger.info("Answer {}: {}",index,gamelist);
         }
 
         //Question5: How much storage do you think you will need?
@@ -138,26 +145,50 @@ public class ProcessAnswerService {
         }
     }
 
-    private void updateCpuInParsedAnswer(List<List<String>> parseAnswer, String processor) {
+    private void updateCpuInParsedAnswer(List<List<String>> parseAnswer, String processors) {
         List<String> cpu = parseAnswer.get(1);
-        if (!cpu.contains(processor)) cpu.add(processor);
+        String[] processorList = processors.split(",");
+        for(String processor : processorList){
+            if (!cpu.contains(processor)) {
+                cpu.add(processor);
+            }
+        }
+        parseAnswer.set(1,cpu);
     }
 
     private void updateGpuInParsedAnswer(List<List<String>> parseAnswer, String graphics) {
         List<String> gpu = parseAnswer.get(2);
-        if(!gpu.contains(graphics)) gpu.add(graphics);
+        String[] graphicList = graphics.split(",");
+        for(String graphic : graphicList){
+            if (!gpu.contains(graphic)) {
+                gpu.add(graphic);
+            }
+        }
+        parseAnswer.set(2, gpu);
     }
 
     private void updateStorageInParsedAnswer(List<List<String>> parseAnswer, int storage) {
         List<String> hd = parseAnswer.get(3);//hard drive
-        String stringStorage = String.valueOf(storage);
-        if(!hd.contains(stringStorage)) hd.add(stringStorage);
+        if(hd!=null){
+            storage += Integer.parseInt(hd.get(0));
+        }
+        List<String> hd1 = new ArrayList<>();
+        hd1.add(String.valueOf(storage));
+        parseAnswer.set(3,hd1);
     }
 
     private void updateMemoryInParsedAnswer(List<List<String>> parseAnswer, int memory) {
         List<String> ram = parseAnswer.get(6);
-        String stringMemory = String.valueOf(memory);
-        if(!ram.contains(stringMemory)) ram.add(String.valueOf(stringMemory));
+        if(ram!=null){
+            if(memory>Integer.parseInt(ram.get(0))){
+                ram.set(0,String.valueOf(memory));
+            }
+            parseAnswer.set(6,ram);
+        } else {
+            List<String> ram1 = new ArrayList<>();
+            ram1.add(String.valueOf(memory));
+            parseAnswer.set(6,ram1);
+        }
     }
 
     private String processQuestion8(Answer answer) {

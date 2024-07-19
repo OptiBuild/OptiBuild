@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 @Service
 public class CaseService {
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CaseService.class);
     private final CaseRepository caseRepository;
     private final FormFactorCompatibilityRepository formFactorCompatibilityRepository;
     @Autowired
@@ -23,7 +23,24 @@ public class CaseService {
         this.formFactorCompatibilityRepository = formFactorCompatibilityRepository;
     }
 
-    public Case getCase (GPU gpu, Motherboard motherboard, PowerSupply powerSupply, CPUCooler cpuCooler) {
+    public Case getCase (List<Case> caseList){
+        Case mostAffordableCase = null;
+        for (Case c : caseList) {
+            if (mostAffordableCase == null || c.getPrice() < mostAffordableCase.getPrice()) {
+                mostAffordableCase = c;
+            }
+        }
+
+        if (mostAffordableCase != null) {
+            logger.info("Most affordable case found: {} with price: {}", mostAffordableCase.getModel(), mostAffordableCase.getPrice());
+        } else {
+            logger.warn("No compatible case found.");
+        }
+
+        return mostAffordableCase;
+    }
+
+    public List<Case> getCaseList (GPU gpu, Motherboard motherboard, PowerSupply powerSupply, CPUCooler cpuCooler) {
         String formFactor = motherboard!=null ? motherboard.getFormFactor() : null;
         int gpuLength = gpu!=null ? gpu.getLength() : 0;
         int psuLength = powerSupply!=null ? powerSupply.getMaxPSULength() : 0;
@@ -41,7 +58,7 @@ public class CaseService {
             if (formFactorCompatibility != null) {
                 Set<Case> compatibleCaseSet = formFactorCompatibility.getCompatibleCases();
                 if(compatibleCaseSet.isEmpty()){
-                    logger.error("No compatible case found.");
+                    logger.error("No compatible case found for the given form factor: {}", formFactor);
                 }
                 for (Case aCase : caseList) {
                     if (compatibleCaseSet.contains(aCase)) {
@@ -55,21 +72,9 @@ public class CaseService {
                 return null;  // or handle appropriately
             }
         }
+        return caseList;
 
-        Case mostAffordableCase = null;
-        for (Case c : caseList) {
-            if (mostAffordableCase == null || c.getPrice() < mostAffordableCase.getPrice()) {
-                mostAffordableCase = c;
-            }
-        }
 
-        if (mostAffordableCase != null) {
-            logger.info("Most affordable case found: {} with price: {}", mostAffordableCase.getModel(), mostAffordableCase.getPrice());
-        } else {
-            logger.warn("No compatible case found.");
-        }
-
-        return mostAffordableCase;
     }
 
 }

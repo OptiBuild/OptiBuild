@@ -7,7 +7,7 @@ public class GameRequirement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name") // 替换为您表中对应的列名，下同
+    @Column(name = "name")
     private String name;
     @Column(name = "pc_requirements")
     private String pcRequirements;

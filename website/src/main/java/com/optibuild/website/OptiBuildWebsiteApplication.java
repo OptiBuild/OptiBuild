@@ -6,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(exclude = {RedisVectorStoreAutoConfiguration.class})
 public class OptiBuildWebsiteApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(OptiBuildWebsiteApplication.class, args);
+	public static void main(String[] args) {SpringApplication.run(OptiBuildWebsiteApplication.class, args);
 	}
 
 }
