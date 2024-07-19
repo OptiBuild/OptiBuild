@@ -4,12 +4,11 @@ import com.optibuild.website.model.Component;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "powersupply")
 public class PowerSupply extends Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type;
+    private String formFactor;
     private int maxPower;
     private int maxPSULength;
 //    private PowerSupplyModular modular;
@@ -26,12 +25,12 @@ public class PowerSupply extends Component {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getFormFactor() {
+        return formFactor;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setFormFactor(String formFactor) {
+        this.formFactor = formFactor;
     }
 
     public int getMaxPower() {

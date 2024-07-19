@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="f0b50127-08b3-4c64-8c41-01721bea051f" />
+          <option name="name" value="database@localhost (DDL)" />
+          <option name="dbmsName" value="MYSQL" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/case.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/case_form_factor_compatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/computercase.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/computercase_formfactorcompatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/cpu.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/cpucooler.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/cpucooler_socket_compatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/form_factor_compatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/form_factor_compatibility_seq.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/formfactorcompatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/formfactorcompatibility_seq.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/game_requirement.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/gpu.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/hard_drive.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/harddrives.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/motherboard.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/motherboard_case_compatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/motherboard_formfactorcompatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/power_supply.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/powersupply.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/ram.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/socket_compatibility.sql" />
+              <option value="file://$PROJECT_DIR$/src/main/resources/hardware_components/socketcompatibility.sql" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

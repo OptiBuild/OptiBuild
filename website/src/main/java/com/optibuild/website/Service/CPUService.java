@@ -6,14 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 public class CPUService {
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CPUService.class);
 
     private final CPURepository cpuRepository;
     @Autowired
@@ -27,20 +25,26 @@ public class CPUService {
         CPU cpu = cpuRepository.findByBrandAndModel("Intel", "Core i5-14600K");
         if (cpuList.size() == 1) {
             logger.info("cpu list size is 1.");
-            logger.info("Find cpu: brand: Intel，model: {}", cpuList.get(0));
-            cpu = cpuRepository.findByBrandAndModel("Intel", cpuList.get(0));
+            int firstIndex = cpuList.get(0).indexOf(' ');
+            String brand = cpuList.get(0).substring(0,firstIndex);
+            String model = cpuList.get(0).substring(firstIndex+1);
+            logger.info("Find cpu: brand: {}, model: {}", brand, model);
+            cpu = cpuRepository.findByBrandAndModel(brand, model);
 
         } else {
             logger.info("cpu list size: {}", cpuList.size());
             // find the cpu with the highest score
             int score = cpu.getScore();
-            for(String model : cpuList) {
-                CPU tempCPU = cpuRepository.findByModel(model);
+            for(String cpuName : cpuList) {
+                int firstIndex = cpuName.indexOf(' ');
+                String brand = cpuName.substring(0,firstIndex);
+                String model = cpuName.substring(firstIndex+1);
+                logger.info("Find cpu: brand: {}, model: {}", brand, model);
+                CPU tempCPU = cpuRepository.findByBrandAndModel(brand,model);
                 if(tempCPU != null && tempCPU.getScore() > score) {
                     score = tempCPU.getScore();
                     cpu = tempCPU;
                 }
-
             }
         }
 

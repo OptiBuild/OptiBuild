@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Service
 public class CPUCoolerService {
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CPUCoolerService.class);
     private final SocketCompatibiltyRepository socketCompatibiltyRepository;
     @Autowired
     public CPUCoolerService (SocketCompatibiltyRepository socketCompatibiltyRepository) {
@@ -24,7 +24,7 @@ public class CPUCoolerService {
     }
 
     public CPUCooler cpuCooler(CPU cpu) {
-        Logger logger = LoggerFactory.getLogger(getClass());
+//        Logger logger = LoggerFactory.getLogger(getClass());
         String socket = cpu.getSocketType();
 
         logger.info("Find CPUCooler compatible with socket: {}", socket);

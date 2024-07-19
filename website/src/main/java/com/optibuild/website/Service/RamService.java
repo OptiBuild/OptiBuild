@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 @Service
 public class RamService {
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(RamService.class);
     private final RAMRepository ramRepository;
     @Autowired
     public RamService(RAMRepository ramRepository) {

@@ -1,7 +1,6 @@
 package com.optibuild.website.Service;
 
 import com.optibuild.website.model.components.HDD;
-import com.optibuild.website.model.components.HardDrive;
 import com.optibuild.website.model.components.SSD;
 import com.optibuild.website.repository.HardDriveRepository;
 import org.slf4j.Logger;
@@ -73,7 +72,7 @@ public class HardDriveService {
         logger.info("Finding lowest price for type: {} and capacity: {}", type, capacity);
 
         if (Objects.equals(type, "HDD")) {
-            List<HDD> hdds = hardDriveRepository.findHDDByCapacity(capacity);
+            List<HDD> hdds = hardDriveRepository.findHDDByCapacityGreaterThanEqual(capacity);
             if (hdds.isEmpty()) {
                 logger.error("No HDDs found for capacity: {}", capacity);
                 return "No HDD found";
@@ -84,15 +83,17 @@ public class HardDriveService {
                     lowestPriceHDD = hdd;
                     price = hdd.getPrice();
                 }
-                return lowestPriceHDD.getBrand()+lowestPriceHDD.getModel();
             }
             logger.info("Lowest price HDD: {} {}", lowestPriceHDD.getBrand(), lowestPriceHDD.getModel());
-            return lowestPriceHDD.getBrand()+lowestPriceHDD.getModel();
+            return lowestPriceHDD.getBrand()+" "+lowestPriceHDD.getModel();
         } else {
             List<SSD> ssds = hardDriveRepository.findSSDByCapacityAndHdInterface(capacity, "M.2");
             if (ssds.isEmpty()) {
-                logger.error("No SSDs found for capacity: {}", capacity);
-                return "No SSD found";
+                ssds = hardDriveRepository.findSSDByCapacity(capacity);
+                if(ssds.isEmpty()){
+                    logger.error("No SSDs found for capacity (equal or greater than): {}", capacity);
+                    return "No SSD found";
+                }
             }
             SSD lowestPriceSSD = ssds.get(0);
             for(SSD ssd : ssds) {
@@ -100,11 +101,10 @@ public class HardDriveService {
                     lowestPriceSSD = ssd;
                     price = ssd.getPrice();
                 }
-                return lowestPriceSSD.getBrand()+lowestPriceSSD.getModel();
             }
 
             logger.info("Lowest price SSD: {} {}", lowestPriceSSD.getBrand(), lowestPriceSSD.getModel());
-            return lowestPriceSSD.getBrand()+lowestPriceSSD.getModel();
+            return lowestPriceSSD.getBrand()+" "+lowestPriceSSD.getModel();
         }
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class MotherboardService {
-    private static final Logger logger = LoggerFactory.getLogger(HardDriveService.class);
+    private static final Logger logger = LoggerFactory.getLogger(MotherboardService.class);
     private final MotherboardRepository motherboardRepository;
     @Autowired
     public MotherboardService (MotherboardRepository motherboardRepository) {
